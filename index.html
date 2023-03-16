@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 </head>
-<body class="max-w-lg mx-auto">
+<body class="max-w-lg mx-auto font-medium">
 
   <div class="flex flex-row items-center p-2 gap-4">
     <a id="logo" class="" href="/">
@@ -153,5 +153,58 @@
       </div>
     </div>
   </section>
+
+  <footer id="site-footer" class="my-4">
+    <hr class="my-4">
+    <div class="my-4 flex flex-row">
+      <a id="logo" class="flex flex-row items-center" href="/">
+        <img src="./assets/logo.svg"/>
+        <span class="flex flex-col text-xs leading-none ml-2">
+          ПРОСТО
+          <strong>GREEN</strong>
+        </span>
+      </a>
+
+      <div class="ml-auto flex flex-row gap-2">
+        <a href="/yandex">
+          <img src="./assets/yandex.svg">
+        </a>
+        <a href="/yandex">
+          <img src="./assets/vk.svg">
+        </a>
+      </div>
+    </div>
+
+    <nav class="flex flex-col items-start">
+      <h4 class="mt-4 mb-3">Продавцам</h4>
+
+      <a class="text-slate-400 text-base" href="/agreement">Личный кабинет продавца</a>
+      <a  class="text-slate-400 text-base" href="/feedback">Продавайте на Просто Green</a>
+      <a  class="text-slate-400 text-base" href="/desktop">Документация для партнёров</a>
+
+      <h4 class="mt-4 mb-3">Садовникам</h4>
+
+      <a  class="text-slate-400 text-base" href="/agreement">Условия сотрудничества</a>
+
+      <h4 class="mt-4 mb-3">Перевозчикам</h4>
+
+      <a  class="text-slate-400 text-base" href="/agreement">Условия сотрудничества</a>
+      <a  class="text-slate-400 text-base" href="/agreement">Как работать с нами</a>
+
+      <h4 class="mt-4 mb-3">Сотрудничество</h4>
+
+      <a  class="text-slate-400 text-base" href="/agreement">Партнёрская программа</a>
+    </nav>
+
+    <hr class="my-4">
+
+    <nav class="flex flex-col items-start">
+      <a  class="text-slate-400 text-sm" href="/agreement">Пользовательское соглашение</a>
+      <a  class="text-slate-400 text-sm" href="/feedback">Обратная связь</a>
+      <a  class="text-slate-400 text-sm" href="/desktop">Полная версия</a>
+    </nav>
+
+    <p class="text-sm text-slate-500 mt-8">© 2023 ООО «ПРОСТО ГРИН»</p>
+  </footer>
 </body>
 </html>
