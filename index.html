@@ -61,32 +61,42 @@
   </nav>
 
   <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-    <div :each="i in 4" class="w-80 my-6 mr-4 relative flex flex-col items-center justify-center">
+    <div :each="i in 4" class="w-80 mb-8 px-2 relative flex flex-col items-center justify-center">
       <img src="./assets/greenery-1.png" class="w-auto rounded-lg shadow-lg" />
-      <span class="absolute">Озелени</span>
+      <span class="absolute">Озелени страну</span>
     </div>
   </div>
 
 
   <section id="featured" class="">
-    <header class="flex flex-row items-baseline">
+    <header class="flex flex-row items-baseline mx-2">
       <h2 class="text-xl font-semibold">Успей купить</h2>
       <a class="ml-auto text-green-400 text-sm" href="/#see-all">Смотреть все</a>
     </header>
 
-    <div class="my-2" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-      <div class="w-36 h-96 px-1 py-1 bg-slate-50 rounded-xl flex flex-col" :each="item in 4">
-        <img src="./assets/blueberry.png" class="h-36 rounded-lg" />
-        <div class="flex flex-row items-center py-2">
-          <span class="bg-repeat bg-stripes rounded-md text-white px-2 py-1 font-semibold">465 ₽</span>
-          <del class="pl-4 text-gray-400 text-sm">489 ₽</del>
+    <div class="my-2 mx-1" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
+      <div :each="item in [
+        {name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',price:438,oldPrice:489,rating:4},
+        {name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',price:465,oldPrice:469,rating:4},
+        {name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',price:123,oldPrice:456,rating:5},
+        {name:'',desc:'',price:'',oldPrice:'',rating:4},
+      ]" class="w-32 mx-1 px-1 py-1 mb-2 bg-slate-50 rounded-xl flex flex-col shadow-lg">
+        <a href="#like" class="absolute top-3 right-3">
+          <svg class="" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <img src="./assets/blueberry.png" class="w-full rounded-lg" />
+        <div class="flex flex-row items-center py-2 gap-2">
+          <span class="bg-repeat bg-stripes rounded-md text-white px-1 whitespace-nowrap" :text="item.price + ' ₽'"></span>
+          <del class="text-gray-400 text-sm whitespace-nowrap" :text="item.oldPrice + ' ₽'"></del>
         </div>
         <div class="bg-white rounded-md p-2">
-          <h4 class="text-base mb-1 leading-tight font-semibold">Голубика "Дюк"</h4>
-          <p class="text-xs">Восхитительный внешний вид, как в пор...</p>
+          <h4 class="text-base mb-1 leading-tight font-semibold line-clamp-2" :text="item.name"></h4>
+          <p class="text-xs line-clamp-4" :text="item.desc"></p>
         </div>
-        <button type="button" class="text-white inline-block w-auto bg-gradient-to-b from-red-300 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg px-4 py-1 leading-snug tracking-wide font-semibold text-sm text-center uppercase -rotate-2 my-2">В корзину</button>
-        <div class="flex items-center">
+        <button type="button" class="text-white inline-block w-auto bg-gradient-to-b from-red-300 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg text-center py-1 leading-snug tracking-wide font-semibold text-sm uppercase -rotate-2 my-2 whitespace-nowrap">В корзину</button>
+        <div class="flex items-center justify-center py-1 bg-white text-center rounded-lg">
             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
             <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
