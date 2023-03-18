@@ -112,14 +112,25 @@
       <h2 class="text-3xl font-medium text-white">Яблони</h2>
     </div>
     <div class="grid grid-cols-2">
-      <article :each="item in 20" class="w-full px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
+      <article :each="item in [
+        {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+        {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+        {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+        {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4}
+      ]" class="w-full px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
         <img src="./assets/apples.png" class="h-52 rounded-lg" />
         <div class="bg-white rounded-md p-2 mt-2">
-          <h3 class="text-xl leading-none mb-2 mt-2 font-semibold">450 ₽</h3>
-          <h4 class="text-base mb-1 leading-tight font-semibold">Яблоня “Мельба”</h4>
-          <p class="text-xs line-clamp-4">Яблоня Мельба относится к сортам среднего срока созревания.
-            При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-            Сорт яблони Мельба был выведен в Швеции.</p>
+          <h3 class="text-xl leading-none mb-2 mt-2 font-semibold"><span :text="item.price"></span> ₽</h3>
+          <h4 class="text-base mb-1 leading-tight font-semibold" :text="item.name"></h4>
+          <p class="text-xs line-clamp-4" :text="item.desc"></p>
         </div>
         <div class="flex flex-row items-center gap-2">
           <span class="flex flex-row items-center">
