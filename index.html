@@ -14,65 +14,64 @@
 </head>
 <body class="max-w-sm mx-auto font-medium">
 
-  <div class="flex flex-row items-center p-2 gap-4">
+  <header class="flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
     <a id="logo" class="" href="/">
-      <img src="./assets/logo.svg"/>
+      <img class="w-12 h-12" src="./assets/logo.svg"/>
     </a>
-    <div id="search" class="relative bg-slate-100 rounded-md w-full h-10 flex items-center px-2 gap-2">
+    <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
       <img src="./assets/search.svg" class="h-6"/>
-      <input class="bg-transparent w-full outline-none" placeholder="Поиск растений"/>
+      <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
       <img src="./assets/camera.svg" class="h-6"/>
     </div>
     <a id="menu" href="#menu" class="ml-auto">
       <img src="./assets/menu.svg"/>
     </a>
-  </div>
+  </header>
 
-  <div id="address" class="flex flex-row items-center p-2 gap-4">
+  <a href="#address" id="address" class="flex flex-row items-center p-4 gap-4">
     <img src="./assets/pin.svg"/>
-    <span>Верхне-Каменская улица, 9к1</span>
+    <span :if="address">Верхне-Каменская улица, 9к1</span>
+    <span :else>Укажите адрес доставки</span>
     <svg width="7" height="12" class="ml-auto" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M1.33301 1L5.74375 5.41074C6.06919 5.73618 6.06919 6.26382 5.74375 6.58926L1.33301 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
     </svg>
-  </div>
+  </a>
 
-  <nav id="categories" class="flex flex-row justify-between py-2">
-    <a href="" class="flex flex-col text-sm w-24 text-center items-center">
+  <nav id="categories" class="flex flex-row py-4">
+    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
       <img src="./assets/list.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span>Каталог</span>
+      <span class="">Каталог</span>
     </a>
-    <a href="" class="flex flex-col text-sm w-24 text-center items-center">
+    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
       <img src="./assets/leaf.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span>Растения</span>
+      <span class="">Растения</span>
     </a>
-    <a href="" class="flex flex-col text-sm w-24 text-center items-center">
+    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
       <img src="./assets/edit.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span>Заказать услугу</span>
+      <span class="">Заказать услугу</span>
     </a>
-    <a href="" class="flex flex-col text-sm w-24 text-center items-center">
+    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
       <img src="./assets/lightning.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span>Акции</span>
+      <span class="">Акции</span>
     </a>
-    <a href="" class="flex flex-col text-sm w-24 text-center items-center">
+    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
       <img src="./assets/plant.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span>Озелени страну</span>
+      <span class="">Озелени страну</span>
     </a>
   </nav>
 
-  <div class="my-8" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-    <div class="w-2/3 h-44 px-4 flex flex-col items-center after:h-8 after:absolute after:bottom-4 after:">
+  <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
+    <div :each="i in 4" class="w-80 my-6 mr-4 relative flex flex-col items-center justify-center">
       <img src="./assets/greenery-1.png" class="w-auto rounded-lg shadow-lg" />
-    </div>
-    <div class="w-2/3 h-44 px-4 flex flex-col items-center">
-      <img src="./assets/greenery-1.png" class="w-auto rounded-lg shadow-lg" />
+      <span class="absolute">Озелени</span>
     </div>
   </div>
 
 
   <section id="featured" class="">
-    <header class="flex flex-row">
+    <header class="flex flex-row items-baseline">
       <h2 class="text-xl font-semibold">Успей купить</h2>
-      <a class="ml-auto text-green-400" href="/#see-all">Смотреть все</a>
+      <a class="ml-auto text-green-400 text-sm" href="/#see-all">Смотреть все</a>
     </header>
 
     <div class="my-2" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
@@ -122,7 +121,6 @@
       </article>
     </div>
   </section>
-
 
   <section id="roses">
     <div class="h-24 px-4 my-4 rounded-lg shadow-lg w-full bg-emerald-300 bg-bannerRoses bg-right bg-cover bg-no-repeat flex items-center">
@@ -201,8 +199,6 @@
 
     <p class="text-sm text-slate-500 mt-8">© 2023 ООО «ПРОСТО ГРИН»</p>
   </footer>
-
-
 
   <div class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
