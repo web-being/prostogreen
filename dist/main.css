@@ -623,6 +623,11 @@ video {
   margin-right: 0.25rem;
 }
 
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -1116,6 +1121,10 @@ video {
   padding-top: 0.5rem;
 }
 
+.pl-3 {
+  padding-left: 0.75rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1285,6 +1294,10 @@ video {
 
 .first\:pl-4:first-child {
   padding-left: 1rem;
+}
+
+.first\:pl-3:first-child {
+  padding-left: 0.75rem;
 }
 
 .hover\:bg-gray-50:hover {
