@@ -9,11 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sprae/sprae.auto.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/sprae@5.0.2/sprae.auto.js" defer></script>
+  <!-- <script src="./node_modules/sprae/sprae.auto.js" defer></script> -->
   <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
 </head>
-<body class="max-w-sm mx-auto font-medium">
 
+<body class="max-w-sm mx-auto font-medium">
   <header class="flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
     <a id="logo" class="" href="/">
       <img class="w-12 h-12" src="./assets/logo.svg"/>
@@ -60,29 +61,24 @@
     </a>
   </nav>
 
-  <section id="banners" class="my-4" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-    <div :each="item,idx in [
-      {img: 'promo-2.png'},
-      {img: 'promo-1.png'}
-    ]" class="w-80 mb-8 pl-3 relative flex flex-col items-center justify-center">
-      <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
-      <!-- <span class="absolute">Озелени страну</span> -->
-    </div>
-  </section>
 
-  <section id="featured" class="">
+  <template :ref="bannerTpl">
+    <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
+      <div :each="item,idx in items" class="w-80 mb-8 pl-3 relative flex flex-col items-center justify-center">
+        <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
+        <!-- <span class="absolute">Озелени страну</span> -->
+      </div>
+    </div>
+  </template>
+
+  <template :ref="featuredTpl">
     <header class="flex flex-row items-baseline mx-4">
       <h2 class="text-xl font-semibold">Успей купить</h2>
       <a class="ml-auto text-teal-400 text-sm" href="/#see-all">Смотреть все</a>
     </header>
 
     <div class="my-2" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-      <div :each="item in [
-        {name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
-        {name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:4},
-        {name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
-        {name:'',desc:'',price:'',oldPrice:'',rating:4},
-      ]" class="mb-4 first:pl-3 pl-2">
+      <div :each="item in items" class="mb-4 first:pl-3 pl-2">
         <div class="w-32 p-1 bg-slate-50 rounded-xl flex flex-col shadow-lg">
           <a href="#like" class="absolute top-3 right-3">
             <svg class="" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,39 +105,14 @@
         </div>
       </div>
     </div>
-  </section>
+  </template>
 
-  <section id="apples" class="mx-3">
+  <template :ref="articlesTpl">
     <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-emerald-300 bg-bannerApples bg-right bg-cover bg-no-repeat flex items-center">
-      <h2 class="text-3xl font-medium text-white">Яблони</h2>
+      <h2 class="text-3xl font-medium text-white" :text="title"></h2>
     </div>
     <div class="grid grid-cols-2 gap-2">
-      <article :each="item, idx in [
-        {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
-        {name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
-        {name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
-        {name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
-        {name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
-        {name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4},
-        {name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
-        {name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
-        При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-        Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4}
-      ]" class="w-full relative px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
+      <article :each="item, idx in items" class="w-full relative px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
         <a href="#like" class="absolute top-3 right-3">
           <svg class="" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -162,7 +133,74 @@
         </div>
       </article>
     </div>
-  </section>
+  </template>
+
+
+  <section id="banner-1" class="my-4" :render="bannerTpl" :with="{items: [
+    {img: 'promo-2.png'},
+    {img: 'promo-1.png'}
+  ]}"></section>
+
+  <section id="featured" :render="featuredTpl" :with="{items: [
+    {name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
+    {name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:4},
+    {name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
+    {name:'',desc:'',price:'',oldPrice:'',rating:4},
+  ]}"></section>
+
+  <section id="apples" class="mx-3" :render="articlesTpl" :with="{title: 'Яблони', items: [
+    {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
+    {name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4},
+    {name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
+    {name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4}
+  ]}"></section>
+
+  <section id="roses" class="mx-3" :render="articlesTpl" :with="{title: 'Розы', items: [
+    {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
+    {name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
+    {name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4},
+    {name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:389,rating:5},
+    {name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4}
+  ]}"></section>
 
   <footer id="site-footer" class="my-4 mx-4">
     <hr class="my-4">
@@ -217,7 +255,7 @@
     <p class="text-sm text-gray-400 mt-8">© 2023 ООО «ПРОСТО ГРИН»</p>
   </footer>
 
-  <div class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+  <nav class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
           <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
               <svg width="22" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -247,7 +285,7 @@
             </svg>
           </button>
       </div>
-  </div>
+  </nav>
 
 </body>
 </html>
