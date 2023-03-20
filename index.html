@@ -108,7 +108,7 @@
   </template>
 
   <template :ref="articlesTpl">
-    <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-emerald-300 bg-bannerApples bg-right bg-cover bg-no-repeat flex items-center">
+    <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-emerald-300 bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/${headerBg})`">
       <h2 class="text-3xl font-medium text-white" :text="title"></h2>
     </div>
     <div class="grid grid-cols-2 gap-2">
@@ -148,7 +148,10 @@
     {name:'',desc:'',price:'',oldPrice:'',rating:4},
   ]}"></section>
 
-  <section id="apples" class="mx-3" :render="articlesTpl" :with="{title: 'Яблони', items: [
+  <section id="apples" class="mx-3" :render="articlesTpl" :with="{
+    title: 'Яблони',
+    headerBg: 'banner-apples.png',
+    items: [
     {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
@@ -175,7 +178,10 @@
     Сорт яблони Мельба был выведен в Швеции.`,price:380,rating:4}
   ]}"></section>
 
-  <section id="roses" class="mx-3" :render="articlesTpl" :with="{title: 'Розы', items: [
+  <section id="roses" class="mx-3" :render="articlesTpl" :with="{
+    title: 'Розы',
+    headerBg: 'banner-roses.png',
+    items: [
     {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,price:450,rating:4},
