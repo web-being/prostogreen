@@ -730,6 +730,10 @@ video {
   max-width: 24rem;
 }
 
+.max-w-md {
+  max-width: 28rem;
+}
+
 .flex-shrink-0 {
   flex-shrink: 0;
 }
