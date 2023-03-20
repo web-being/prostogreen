@@ -14,129 +14,124 @@
   <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
 </head>
 
-<body class="max-w-sm mx-auto font-medium">
+
+<template :ref="bannerTpl">
+  <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
+    <div :each="item,idx in items" class="w-80 mb-8 pl-3 pt-2 relative">
+      <div class="hover:scale-[1.02] transition-transform">
+        <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
+      </div>
+      <!-- <span class="absolute">Озелени страну</span> -->
+    </div>
+  </div>
+</template>
+
+<template :ref="featuredTpl">
+  <header class="flex flex-row items-baseline mx-4">
+    <h2 class="text-xl font-semibold">Успей купить</h2>
+    <a class="ml-auto text-teal-400 hover:text-teal-300 active:text-teal-200 text-sm" href="/#see-all">Смотреть все</a>
+  </header>
+
+  <div class="my-2" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
+    <div :each="item in items" class="mb-4 first:pl-3 pl-2">
+      <div class="w-32 p-1 bg-slate-50 rounded-xl flex flex-col shadow-lg">
+        <a href="#like" class="absolute top-3 right-3">
+          <svg class="" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] w-full rounded-lg" />
+        <div class="flex flex-row items-center py-2 gap-3">
+          <span class="bg-repeat bg-stripes rounded-md text-white px-1 whitespace-nowrap" :text="item.price + ' ₽'"></span>
+          <del class="text-gray-400 text-sm whitespace-nowrap" :text="item.oldPrice + ' ₽'"></del>
+        </div>
+        <div class="bg-white rounded-md p-2">
+          <h4 class="text-base mb-1 leading-tight font-semibold line-clamp-2" :text="item.name"></h4>
+          <p class="text-xs line-clamp-3" :text="item.desc"></p>
+        </div>
+        <button type="button" class="text-white inline-block w-auto bg-gradient-to-b from-red-300 to-red-500 hover:from-red-200 hover:to-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg text-center py-1 leading-snug tracking-wide font-semibold text-sm uppercase -rotate-2 my-2 whitespace-nowrap">В корзину</button>
+        <div class="flex items-center justify-center py-1 bg-white text-center rounded-lg">
+          <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template :ref="articlesTpl">
+  <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/${headerBg})`">
+    <h2 class="text-3xl font-medium text-white" :text="title"></h2>
+  </div>
+  <div class="grid grid-cols-2 gap-2">
+    <article :each="item, idx in items" class="w-full relative px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
+      <a href="#like" class="absolute top-3 right-3">
+        <svg class="" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <img :src="`./assets/${item.img}`" class="h-48 rounded-lg" />
+      <div class="bg-white rounded-md p-2 mt-2">
+        <h3 class="text-xl leading-none mb-2 mt-1 font-semibold"><span :text="item.price"></span> ₽</h3>
+        <h4 class="text-base mb-1 leading-tight font-semibold" :text="item.name"></h4>
+        <p class="text-xs line-clamp-4" :text="item.desc"></p>
+      </div>
+      <div class="flex flex-row items-center gap-2 mt-auto">
+        <span class="flex flex-row items-center">
+          <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+          4.5
+        </span>
+        <button type="button" class="ml-auto text-white inline-block w-auto bg-gradient-to-b from-teal-300 to-teal-400 hover:from-teal-200 hover:to-teal-300 focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 rounded-lg py-1 leading-snug tracking-wide font-semibold text-sm text-center uppercase px-2 my-2 whitespace-nowrap">В корзину</button>
+      </div>
+    </article>
+  </div>
+</template>
+
+
+<body class="max-w-sm mx-auto font-medium text-gray-800">
   <header class="flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
     <a id="logo" class="" href="/">
       <img class="w-12 h-12" src="./assets/logo.svg"/>
     </a>
     <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
-      <img src="./assets/search.svg" class="h-6"/>
+      <img class="block h-5" src="./assets/search.svg"/>
       <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
-      <img src="./assets/camera.svg" class="h-6"/>
+      <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="./assets/camera.svg"/></a>
     </div>
-    <a id="menu" href="#menu" class="ml-auto mr-2">
-      <img src="./assets/menu.svg"/>
+    <a id="menu" href="#menu" class="block ml-auto mr-2 hover:opacity-50">
+      <img class="block" src="./assets/menu.svg"/>
     </a>
   </header>
 
-  <a href="#address" id="address" class="flex flex-row items-center p-4 gap-4">
-    <img src="./assets/pin.svg"/>
+  <a href="#address" id="address" class="flex flex-row items-center p-4 gap-4 hover:text-gray-500 active:text-gray-400">
+    <svg class="opacity-90" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13 9C13 11.2091 11.2091 13 9 13C6.79086 13 5 11.2091 5 9C5 6.79086 6.79086 5 9 5C11.2091 5 13 6.79086 13 9Z" stroke="currentColor" stroke-width="2"/>
+      <path d="M17 9C17 13.4183 11 21 9 21C7 21 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" stroke-width="2"/>
+    </svg>
     <span :if="address">Верхне-Каменская улица, 9к1</span>
     <span :else>Укажите адрес доставки</span>
-    <svg width="7" height="12" class="ml-auto" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1.33301 1L5.74375 5.41074C6.06919 5.73618 6.06919 6.26382 5.74375 6.58926L1.33301 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+    <svg width="7" height="12" class="ml-auto opacity-50" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1.33301 1L5.74375 5.41074C6.06919 5.73618 6.06919 6.26382 5.74375 6.58926L1.33301 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
   </a>
 
   <nav id="categories" class="flex flex-row py-4">
-    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
-      <img src="./assets/list.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span class="">Каталог</span>
-    </a>
-    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
-      <img src="./assets/leaf.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span class="">Растения</span>
-    </a>
-    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
-      <img src="./assets/edit.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span class="">Заказать услугу</span>
-    </a>
-    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
-      <img src="./assets/lightning.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span class="">Акции</span>
-    </a>
-    <a href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center">
-      <img src="./assets/plant.svg" class="border-2 border-green-600 p-2 mb-2 rounded-lg w-12 h-12" />
-      <span class="">Озелени страну</span>
+    <a :each="item in [
+      {name:'Каталог',img:'list.svg',},
+      {name:'Растения',img:'leaf.svg',},
+      {name:'Заказать услугу',img:'edit.svg',},
+      {name:'Акции',img:'lightning.svg',},
+      {name:'Озелени страну',img:'plant.svg',}
+    ]" href="" class="flex flex-col text-xs leading-tight w-24 text-center items-center hover:text-gray-500 active:text-gray-400">
+      <img :src="`./assets/${item.img}`" class="border-2 border-green-600  hover:bg-green-50 p-2 mb-2 rounded-lg w-12 h-12 opacity-90 hover:opacity-70" />
+      <span class="" :text="item.name"></span>
     </a>
   </nav>
 
-
-  <template :ref="bannerTpl">
-    <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-      <div :each="item,idx in items" class="w-80 mb-8 pl-3 relative flex flex-col items-center justify-center">
-        <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
-        <!-- <span class="absolute">Озелени страну</span> -->
-      </div>
-    </div>
-  </template>
-
-  <template :ref="featuredTpl">
-    <header class="flex flex-row items-baseline mx-4">
-      <h2 class="text-xl font-semibold">Успей купить</h2>
-      <a class="ml-auto text-teal-400 text-sm" href="/#see-all">Смотреть все</a>
-    </header>
-
-    <div class="my-2" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-      <div :each="item in items" class="mb-4 first:pl-3 pl-2">
-        <div class="w-32 p-1 bg-slate-50 rounded-xl flex flex-col shadow-lg">
-          <a href="#like" class="absolute top-3 right-3">
-            <svg class="" width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-          <img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] w-full rounded-lg" />
-          <div class="flex flex-row items-center py-2 gap-3">
-            <span class="bg-repeat bg-stripes rounded-md text-white px-1 whitespace-nowrap" :text="item.price + ' ₽'"></span>
-            <del class="text-gray-400 text-sm whitespace-nowrap" :text="item.oldPrice + ' ₽'"></del>
-          </div>
-          <div class="bg-white rounded-md p-2">
-            <h4 class="text-base mb-1 leading-tight font-semibold line-clamp-2" :text="item.name"></h4>
-            <p class="text-xs line-clamp-3" :text="item.desc"></p>
-          </div>
-          <button type="button" class="text-white inline-block w-auto bg-gradient-to-b from-red-300 to-red-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg text-center py-1 leading-snug tracking-wide font-semibold text-sm uppercase -rotate-2 my-2 whitespace-nowrap">В корзину</button>
-          <div class="flex items-center justify-center py-1 bg-white text-center rounded-lg">
-            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Second star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Third star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fourth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-300 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Fifth star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <template :ref="articlesTpl">
-    <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-emerald-300 bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/${headerBg})`">
-      <h2 class="text-3xl font-medium text-white" :text="title"></h2>
-    </div>
-    <div class="grid grid-cols-2 gap-2">
-      <article :each="item, idx in items" class="w-full relative px-1 py-1 bg-slate-50 rounded-xl flex flex-col">
-        <a href="#like" class="absolute top-3 right-3">
-          <svg class="" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <img :src="`./assets/${item.img}`" class="h-48 rounded-lg" />
-        <div class="bg-white rounded-md p-2 mt-2">
-          <h3 class="text-xl leading-none mb-2 mt-1 font-semibold"><span :text="item.price"></span> ₽</h3>
-          <h4 class="text-base mb-1 leading-tight font-semibold" :text="item.name"></h4>
-          <p class="text-xs line-clamp-4" :text="item.desc"></p>
-        </div>
-        <div class="flex flex-row items-center gap-2 mt-auto">
-          <span class="flex flex-row items-center">
-            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-            4.5
-          </span>
-          <button type="button" class="ml-auto text-white inline-block w-auto bg-gradient-to-b from-teal-300 to-teal-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 rounded-lg py-1 leading-snug tracking-wide font-semibold text-sm text-center uppercase px-2 my-2 whitespace-nowrap">В корзину</button>
-        </div>
-      </article>
-    </div>
-  </template>
-
-
-  <section id="banner-1" class="my-4" :render="bannerTpl" :with="{items: [
+  <section id="banner-1" class="my-2" :render="bannerTpl" :with="{items: [
     {img: 'promo-2.png'},
     {img: 'promo-1.png'}
   ]}"></section>
@@ -232,30 +227,30 @@
     <nav class="flex flex-col items-start">
       <h4 class="mt-4 mb-3">Продавцам</h4>
 
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Личный кабинет продавца</a>
-      <a class="text-gray-400 text-sm pb-2" href="/feedback">Продавайте на Просто Green</a>
-      <a class="text-gray-400 text-sm pb-2" href="/desktop">Документация для партнёров</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Личный кабинет продавца</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/feedback">Продавайте на Просто Green</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/desktop">Документация для партнёров</a>
 
       <h4 class="mt-4 mb-3">Садовникам</h4>
 
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
 
       <h4 class="mt-4 mb-3">Перевозчикам</h4>
 
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Как работать с нами</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Как работать с нами</a>
 
       <h4 class="mt-4 mb-3">Сотрудничество</h4>
 
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Партнёрская программа</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Партнёрская программа</a>
     </nav>
 
     <hr class="my-4">
 
     <nav class="flex flex-col items-start">
-      <a class="text-gray-400 text-sm pb-2" href="/agreement">Пользовательское соглашение</a>
-      <a class="text-gray-400 text-sm pb-2" href="/feedback">Обратная связь</a>
-      <a class="text-gray-400 text-sm pb-2" href="/desktop">Полная версия</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Пользовательское соглашение</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/feedback">Обратная связь</a>
+      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/desktop">Полная версия</a>
     </nav>
 
     <p class="text-sm text-gray-400 mt-8">© 2023 ООО «ПРОСТО ГРИН»</p>
