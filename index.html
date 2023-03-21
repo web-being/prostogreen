@@ -40,7 +40,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] w-full rounded-lg" />
+        <img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] object-cover w-full rounded-lg" />
         <div class="flex flex-row items-center py-2 gap-3">
           <span class="bg-repeat bg-stripes rounded-md text-white px-1 whitespace-nowrap" :text="item.price + ' ₽'"></span>
           <del class="text-gray-400 text-sm whitespace-nowrap" :text="item.oldPrice + ' ₽'"></del>
@@ -59,7 +59,7 @@
 </template>
 
 <template :ref="articlesTpl">
-  <div class="h-20 px-4 my-4 rounded-lg shadow-lg w-full bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/${headerBg})`">
+  <div class="h-20 px-4 my-4 rounded-lg shadow-md w-full bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/${headerBg})`">
     <h2 class="text-3xl font-medium text-white" :text="title"></h2>
   </div>
   <div class="grid grid-cols-2 gap-2">
