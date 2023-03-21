@@ -18,7 +18,7 @@
 <template :ref="bannerTpl">
   <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
     <div :each="item,idx in items" class="w-80 mb-8 pl-3 pt-2 relative">
-      <div class="hover:scale-[1.02] transition-transform">
+      <div class="hover:scale-[1.02] transition-transform relative after:absolute after:-bottom-2 after:-left-2 after:-right-2 after:bg-shadow after:h-4 after:-z-10">
         <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
       </div>
       <!-- <span class="absolute">Озелени страну</span> -->
