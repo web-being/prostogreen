@@ -64,9 +64,10 @@
   </div>
   <div class="grid grid-cols-2 gap-2">
     <article :each="item, idx in items" class="w-full relative px-1 py-1 bg-slate-100 rounded-xl flex flex-col">
-      <a href="#like" class="absolute top-3 right-3">
-        <svg class="" width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="#FF5A50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <a href="#like" class="absolute top-3 right-3 text-red-400 hover:text-red-300"
+        :onclick="e => (likes.includes(item.id) ? likes.splice(likes.indexOf(item.id), 1) : likes.push(item.id))">
+        <svg class="" width="20" height="20" viewBox="0 0 16 16" :fill="likes.includes(item.id) ? 'currentColor' : 'none'" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
       <img :src="`./assets/${item.img}`" class="h-52 object-cover rounded-lg" />
@@ -80,14 +81,14 @@
           <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
           <span :text="item.rating.toFixed(1)"></span>
         </span>
-        <button type="button" class="ml-auto text-white inline-block w-auto bg-gradient-to-b focus:ring-4 focus:outline-none  rounded-lg py-1 leading-snug tracking-wide font-semibold text-sm text-center uppercase px-3 my-2 whitespace-nowrap" :class="item.special ? 'from-red-300 to-red-500 hover:from-red-200 hover:to-red-300 focus:ring-red-300 -rotate-2' : 'from-green-300 to-green-500 hover:from-green-200 hover:to-green-300 focus:ring-green-300'">В корзину</button>
+        <button type="button" class="ml-auto text-white inline-block w-auto bg-gradient-to-b focus:ring-4 focus:outline-none  rounded-lg py-1 leading-snug tracking-wide font-semibold text-sm text-center uppercase px-3 my-2 whitespace-nowrap" :class="item.special ? 'from-red-300 to-red-500 hover:from-red-200 hover:to-red-400 focus:ring-red-300 -rotate-2' : 'from-green-300 to-green-500 hover:from-green-200 hover:to-green-400 focus:ring-green-300'">В корзину</button>
       </div>
     </article>
   </div>
 </template>
 
 
-<body class="max-w-md mx-auto font-medium text-gray-800">
+<body class="max-w-md mx-auto font-medium text-gray-800" :with="{likes:[]}">
   <header class="flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
     <a id="logo" class="" href="/">
       <img class="w-12 h-12" src="./assets/logo.svg"/>
@@ -133,38 +134,38 @@
   ]}"></section>
 
   <section id="featured" :render="featuredTpl" :with="{items: [
-    {name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
-    {name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
-    {name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
-    {name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
+    {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
+    {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
+    {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
+    {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
   ]}"></section>
 
   <section id="apples" class="mx-3" :render="articlesTpl" :with="{
     title: 'Яблони',
     headerBg: 'banner-apples.png',
     items: [
-    {name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-1.png',price:450,rating:4,special:true},
-    {name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:2,name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-2.png',price:450,rating:4.3,special:true},
-    {name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:3,name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-3.png',price:450,rating:4,special:true},
-    {name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:4,name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-4.png',price:450,rating:4.1},
-    {name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:5,name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-5.png',price:389,rating:5},
-    {name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:6,name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-6.png',price:380,rating:4},
-    {name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    {id:7,name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-7.png',price:389,rating:5},
-    {name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+    {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
   ]}"></section>
@@ -173,28 +174,28 @@
     title: 'Розы',
     headerBg: 'banner-roses.png',
     items: [
-    {name:'Роза “Кофе брейк”',desc:`Роза Кофе брейк относится к сортам среднего срока созревания.
+    {id:11,name:'Роза “Кофе брейк”',desc:`Роза Кофе брейк относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-1.png',price:450,rating:4,special:true},
-    {name:'Роза “Ностальгия”',desc:`Роза Ностальгия относится к сортам среднего срока созревания.
+    {id:12,name:'Роза “Ностальгия”',desc:`Роза Ностальгия относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-2.png',price:450,rating:4,special:true},
-    {name:'Роза “Белла Вита”',desc:`Роза Белла Вита относится к сортам среднего срока созревания.
+    {id:13,name:'Роза “Белла Вита”',desc:`Роза Белла Вита относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-3.png',price:450,rating:4,special:true},
-    {name:'Роза “Анастасия”',desc:`Роза Анастасия относится к сортам среднего срока созревания.
+    {id:14,name:'Роза “Анастасия”',desc:`Роза Анастасия относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-4.png',price:450,rating:4},
-    {name:'Роза “Королевство”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+    {id:15,name:'Роза “Королевство”',desc:`Роза Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-5.png',price:389,rating:5},
-    {name:'Роза “Сусанна”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+    {id:16,name:'Роза “Сусанна”',desc:`Роза Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-6.png',price:380,rating:4},
-    {name:'Роза “Шакира”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+    {id:17,name:'Роза “Шакира”',desc:`Роза Мельба относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-7.png',price:389,rating:5},
-    {name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
+    {id:18,name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'roses-8.png',price:380,rating:4}
   ]}"></section>
@@ -254,33 +255,32 @@
 
   <nav class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-          <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-              <svg width="22" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.50033 21.8185V13.6519C7.50033 13.0075 8.02266 12.4852 8.66699 12.4852H13.3337C13.978 12.4852 14.5003 13.0075 14.5003 13.6519V21.8185M1.66699 19.4852V10.6663C1.66699 9.26663 2.29525 7.94086 3.37855 7.05452L9.52277 2.02743C10.3823 1.32419 11.6184 1.32419 12.4779 2.02743L18.6221 7.05452C19.7054 7.94086 20.3337 9.26664 20.3337 10.6663V19.4852C20.3337 20.7739 19.289 21.8185 18.0003 21.8185H15.667H6.33366H4.00033C2.71166 21.8185 1.66699 20.7739 1.66699 19.4852Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-                </svg>
-          </button>
-          <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg width="19" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.8337 21.9163H4.29199C2.5661 21.9163 1.16699 20.5172 1.16699 18.7913M1.16699 18.7913C1.16699 17.0655 2.5661 15.6663 4.29199 15.6663H16.02C17.0217 15.6663 17.8337 14.8544 17.8337 13.8527V3.16634C17.8337 2.01575 16.9009 1.08301 15.7503 1.08301H4.29199C2.5661 1.08301 1.16699 2.48212 1.16699 4.20801V18.7913ZM15.7503 15.6663V21.9163M5.33366 1.08301V15.6663" stroke="#222222" stroke-width="1.81362" stroke-linecap="round"/>
-              </svg>
-          </button>
-          <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg width="29" height="28" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1.5 2H2.40948C3.94041 2 5.22575 3.15275 5.39178 4.67466L6.60822 15.8253C6.77425 17.3472 8.05959 18.5 9.59053 18.5H22.569C23.9404 18.5 25.1371 17.5701 25.476 16.2413L27.5459 8.12466C28.0296 6.22781 26.5965 4.38333 24.6389 4.38333H6.9M6.93713 23.9374H8.06213M6.93713 25.0624H8.06213M23.4371 23.9374H24.5621M23.4371 25.0624H24.5621M9 24.5C9 25.3284 8.32843 26 7.5 26C6.67157 26 6 25.3284 6 24.5C6 23.6716 6.67157 23 7.5 23C8.32843 23 9 23.6716 9 24.5ZM25.5 24.5C25.5 25.3284 24.8284 26 24 26C23.1716 26 22.5 25.3284 22.5 24.5C22.5 23.6716 23.1716 23 24 23C24.8284 23 25.5 23.6716 25.5 24.5Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-              </svg>
-          </button>
-          </button>
-          <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg width="24" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9928 3.9025C9.89349 1.45598 6.39273 0.797875 3.76243 3.03816C1.13213 5.27844 0.761816 9.02407 2.82741 11.6737C4.54481 13.8766 9.74226 18.5228 11.4457 20.0266C11.6363 20.1948 11.7316 20.279 11.8427 20.312C11.9397 20.3409 12.0459 20.3409 12.1429 20.312C12.254 20.279 12.3493 20.1948 12.5399 20.0266C14.2434 18.5228 19.4408 13.8766 21.1582 11.6737C23.2238 9.02407 22.8987 5.25487 20.2232 3.03816C17.5477 0.82144 14.0921 1.45598 11.9928 3.9025Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round" stroke-linejoin="round"/>
+        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <svg width="22" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.50033 21.8185V13.6519C7.50033 13.0075 8.02266 12.4852 8.66699 12.4852H13.3337C13.978 12.4852 14.5003 13.0075 14.5003 13.6519V21.8185M1.66699 19.4852V10.6663C1.66699 9.26663 2.29525 7.94086 3.37855 7.05452L9.52277 2.02743C10.3823 1.32419 11.6184 1.32419 12.4779 2.02743L18.6221 7.05452C19.7054 7.94086 20.3337 9.26664 20.3337 10.6663V19.4852C20.3337 20.7739 19.289 21.8185 18.0003 21.8185H15.667H6.33366H4.00033C2.71166 21.8185 1.66699 20.7739 1.66699 19.4852Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
             </svg>
-          </button>
-          </button>
-          <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg width="22" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.0003 13.3337C14.222 13.3337 16.8337 10.722 16.8337 7.50033C16.8337 4.27866 14.222 1.66699 11.0003 1.66699C7.77866 1.66699 5.16699 4.27866 5.16699 7.50033C5.16699 10.722 7.77866 13.3337 11.0003 13.3337ZM11.0003 13.3337C5.84567 13.3337 1.66699 16.4677 1.66699 20.3337M11.0003 13.3337C16.155 13.3337 20.3337 16.4677 20.3337 20.3337" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-            </svg>
-          </button>
+        </button>
+        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg width="19" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.8337 21.9163H4.29199C2.5661 21.9163 1.16699 20.5172 1.16699 18.7913M1.16699 18.7913C1.16699 17.0655 2.5661 15.6663 4.29199 15.6663H16.02C17.0217 15.6663 17.8337 14.8544 17.8337 13.8527V3.16634C17.8337 2.01575 16.9009 1.08301 15.7503 1.08301H4.29199C2.5661 1.08301 1.16699 2.48212 1.16699 4.20801V18.7913ZM15.7503 15.6663V21.9163M5.33366 1.08301V15.6663" stroke="#222222" stroke-width="1.81362" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg width="29" height="28" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.5 2H2.40948C3.94041 2 5.22575 3.15275 5.39178 4.67466L6.60822 15.8253C6.77425 17.3472 8.05959 18.5 9.59053 18.5H22.569C23.9404 18.5 25.1371 17.5701 25.476 16.2413L27.5459 8.12466C28.0296 6.22781 26.5965 4.38333 24.6389 4.38333H6.9M6.93713 23.9374H8.06213M6.93713 25.0624H8.06213M23.4371 23.9374H24.5621M23.4371 25.0624H24.5621M9 24.5C9 25.3284 8.32843 26 7.5 26C6.67157 26 6 25.3284 6 24.5C6 23.6716 6.67157 23 7.5 23C8.32843 23 9 23.6716 9 24.5ZM25.5 24.5C25.5 25.3284 24.8284 26 24 26C23.1716 26 22.5 25.3284 22.5 24.5C22.5 23.6716 23.1716 23 24 23C24.8284 23 25.5 23.6716 25.5 24.5Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg width="24" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9928 3.9025C9.89349 1.45598 6.39273 0.797875 3.76243 3.03816C1.13213 5.27844 0.761816 9.02407 2.82741 11.6737C4.54481 13.8766 9.74226 18.5228 11.4457 20.0266C11.6363 20.1948 11.7316 20.279 11.8427 20.312C11.9397 20.3409 12.0459 20.3409 12.1429 20.312C12.254 20.279 12.3493 20.1948 12.5399 20.0266C14.2434 18.5228 19.4408 13.8766 21.1582 11.6737C23.2238 9.02407 22.8987 5.25487 20.2232 3.03816C17.5477 0.82144 14.0921 1.45598 11.9928 3.9025Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="absolute w-4 h-4 top-3 right-6 flex flex-row text-center items-center justify-center text-xs bg-red-500 rounded-full text-white">1</span>
+        </button>
+        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg width="22" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.0003 13.3337C14.222 13.3337 16.8337 10.722 16.8337 7.50033C16.8337 4.27866 14.222 1.66699 11.0003 1.66699C7.77866 1.66699 5.16699 4.27866 5.16699 7.50033C5.16699 10.722 7.77866 13.3337 11.0003 13.3337ZM11.0003 13.3337C5.84567 13.3337 1.66699 16.4677 1.66699 20.3337M11.0003 13.3337C16.155 13.3337 20.3337 16.4677 20.3337 20.3337" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
   </nav>
 
