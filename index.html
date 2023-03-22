@@ -108,7 +108,12 @@
     </a>
   </header>
 
-  <main id="home" :if="!path || path=='/'">
+  <main id="item" :if="path.endsWith('item')">
+    <h1>One Item</h1>
+    <p>Content</p>
+  </main>
+
+  <main id="home" :else>
     <a href="#address" id="address" class="flex flex-row items-center p-4 gap-4 hover:text-gray-500 active:text-gray-400">
       <svg class="opacity-90" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M13 9C13 11.2091 11.2091 13 9 13C6.79086 13 5 11.2091 5 9C5 6.79086 6.79086 5 9 5C11.2091 5 13 6.79086 13 9Z" stroke="currentColor" stroke-width="2"/>
@@ -261,10 +266,6 @@
 
   </main>
 
-  <main id="item" :else :if="path=='item'">
-    <h1>One Item</h1>
-    <p>Content</p>
-  </main>
 
   <nav class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
