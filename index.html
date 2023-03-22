@@ -9,15 +9,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sprae@5.0.4/sprae.auto.js" defer></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/sprae@5.1.0/sprae.auto.js" defer></script>
   <!-- <script src="./node_modules/sprae/sprae.auto.js" defer></script> -->
   <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
-
-  <script type="module">
-    import sprae from "https://cdn.jsdelivr.net/npm/sprae@5.0.4/sprae.js"
-    Object.assign(sprae.globals, {window, history, document, Set, Map})
-    sprae(document.documentElement)
-  </script>
 </head>
 
 
@@ -77,7 +71,7 @@
         </svg>
       </a>
       <a href="/item" class="block h-52" :onclick.prevent="e => history.pushState(null, null, path='item')">
-        <img :src="`./assets/${item.img}`" class="w-full object-cover rounded-lg" />
+        <img :src="`./assets/${item.img}`" class="w-full max-h-full object-cover rounded-lg" />
       </a>
       <div class="bg-white rounded-md p-2 mt-1">
         <h3 :else class="inline-block leading-none mb-2 mt-1 px-1 py-1 font-semibold whitespace-nowrap" :class="item.special ? 'bg-repeat bg-stripes rounded-md text-white text-lg' : 'text-xl'"><span :text="item.price"></span> ₽</h3>
@@ -293,7 +287,7 @@
           <svg width="24" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9928 3.9025C9.89349 1.45598 6.39273 0.797875 3.76243 3.03816C1.13213 5.27844 0.761816 9.02407 2.82741 11.6737C4.54481 13.8766 9.74226 18.5228 11.4457 20.0266C11.6363 20.1948 11.7316 20.279 11.8427 20.312C11.9397 20.3409 12.0459 20.3409 12.1429 20.312C12.254 20.279 12.3493 20.1948 12.5399 20.0266C14.2434 18.5228 19.4408 13.8766 21.1582 11.6737C23.2238 9.02407 22.8987 5.25487 20.2232 3.03816C17.5477 0.82144 14.0921 1.45598 11.9928 3.9025Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <span class="absolute w-4 h-4 top-3 right-6 flex flex-row text-center items-center justify-center text-xs bg-red-500 rounded-full text-white">1</span>
+          <span :if="likes.length" :text="likes.length" class="absolute w-4 h-4 top-3 right-6 flex flex-row text-center items-center justify-center text-xs bg-red-500 rounded-full text-white"></span>
         </button>
         <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
           <svg width="22" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
