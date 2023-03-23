@@ -6,7 +6,7 @@ title: Главная
 
 <template :ref="bannerTpl">
   <div class="" data-flickity='{ "cellAlign": "left", "contain": true, "prevNextButtons": false, "pageDots": false }'>
-    <a href="/item" :each="item,idx in items" class="w-80 mb-8 pl-3 pt-2 relative">
+    <a href="item" :each="item,idx in items" class="w-80 mb-8 pl-3 pt-2 relative">
       <div class="hover:scale-[1.02] transition-transform relative after:absolute after:-bottom-2 after:-left-2 after:-right-2 after:bg-shadow after:h-4 after:-z-10">
         <img :src="`./assets/${item.img}`" height="136" class="min-h-[136px] w-auto rounded-lg shadow-lg" />
       </div>
@@ -29,13 +29,13 @@ title: Главная
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="/item"><img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] object-cover w-full rounded-lg" /></a>
+        <a href="item"><img :src="`./assets/${item.img}`" height="130" class="min-h-[130px] object-cover w-full rounded-lg" /></a>
         <div class="flex flex-row items-center py-2 gap-3">
           <span class="bg-repeat bg-stripes rounded-md text-white px-1 whitespace-nowrap" :text="item.price + ' ₽'"></span>
           <del class="text-gray-400 text-sm whitespace-nowrap" :text="item.oldPrice + ' ₽'"></del>
         </div>
         <div class="bg-white rounded-md p-2">
-          <a href="/item"><h4 class="text-base mb-1 leading-tight font-semibold line-clamp-2" :text="item.name"></h4></a>
+          <a href="item"><h4 class="text-base mb-1 leading-tight font-semibold line-clamp-2" :text="item.name"></h4></a>
           <p class="text-xs line-clamp-3" :text="item.desc"></p>
         </div>
         <button type="button" class="text-white inline-block w-auto bg-gradient-to-b from-red-300 to-red-500 hover:from-red-200 hover:to-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 rounded-lg text-center py-1 leading-snug tracking-wide font-semibold text-sm uppercase -rotate-2 my-2 whitespace-nowrap">В корзину</button>
@@ -59,12 +59,12 @@ title: Главная
           <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <a href="/item" class="block h-52">
+      <a href="item" class="block h-52">
         <img :src="`./assets/${item.img}`" class="w-full max-h-full object-cover rounded-lg" />
       </a>
       <div class="bg-white rounded-md p-2 mt-1">
         <h3 :else class="inline-block leading-none mb-2 mt-1 px-1 py-1 font-semibold whitespace-nowrap" :class="item.special ? 'bg-repeat bg-stripes rounded-md text-white text-lg' : 'text-xl'"><span :text="item.price"></span> ₽</h3>
-        <a href="/item"><h4 class="text-base mb-1 leading-tight font-semibold" :text="item.name"></h4></a>
+        <a href="item"><h4 class="text-base mb-1 leading-tight font-semibold" :text="item.name"></h4></a>
         <p class="text-xs line-clamp-4" :text="item.desc"></p>
       </div>
       <div class="flex flex-row items-center gap-2 mt-auto">
@@ -93,11 +93,11 @@ title: Главная
 
 <nav id="categories" class="flex flex-row py-4">
   <a :each="item in [
-    {name:'Каталог',img:'list.svg',href:'/catalog'},
-    {name:'Растения',img:'leaf.svg',href:'/plants'},
-    {name:'Заказать услугу',img:'edit.svg',href:'/order'},
-    {name:'Акции',img:'lightning.svg',href:'/promo'},
-    {name:'Озелени страну',img:'plant.svg',href:'/greenery'}
+    {name:'Каталог',img:'list.svg',href:'catalog'},
+    {name:'Растения',img:'leaf.svg',href:'plants'},
+    {name:'Заказать услугу',img:'edit.svg',href:'order'},
+    {name:'Акции',img:'lightning.svg',href:'promo'},
+    {name:'Озелени страну',img:'plant.svg',href:'greenery'}
   ]" :href="item.href" class="flex flex-col text-xs leading-tight w-24 text-center items-center hover:text-gray-500 active:text-gray-400">
     <img :src="`./assets/${item.img}`" class="border-2 border-green-600  hover:bg-green-50 p-2 mb-2 rounded-lg w-12 h-12 opacity-90 hover:opacity-70" />
     <span class="" :text="item.name"></span>
