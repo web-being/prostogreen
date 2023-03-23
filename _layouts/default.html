@@ -83,7 +83,7 @@
           <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>First star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
           <span :text="item.rating.toFixed(1)"></span>
         </span>
-        <button type="button" class="button font-semibold uppercase ml-autoinline-block w-auto my-2" :class="item.special && 'button-primary'">В корзину</button>
+        <button type="button" class="button font-semibold uppercase ml-autoinline-block w-auto my-2" :class="item.special ? 'button-red' : 'button-green'">В корзину</button>
       </div>
     </article>
   </div>
@@ -92,6 +92,8 @@
 <body class="font-medium text-gray-800" :with="{
   likes: [],
   menu: false,
+  login: false,
+  signup: false,
   address: '',
   like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
 }">
@@ -109,14 +111,14 @@
   </a>
 </header>
 
-<section id="menu" :if="menu && !login" class="popup">
+<section id="menu" :if="menu" class="popup">
+  <a href="#close" :onclick.prevent="e => menu = false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
   <header class="flex flex-row my-4 items-center">
-    <a href="login" class="button h-10 font-medium" >Войти / Зарегистрироваться</button>
-    <a href="#close" :onclick.prevent="e => menu = false" class="ml-auto text-gray-500">
-      <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
-      </svg>
-    </a>
+    <button class="button button-green h-10 font-medium" :onclick.prevent="e=>(login=true,menu=false)">Войти / Зарегистрироваться</button>
   </header>
   <ul class="divide-y">
     <li class="flex items-center" :each="item in [
@@ -129,12 +131,45 @@
       {href:'extra',name:'Сопутствующие товары',icon:'basket'},
       {href:'help',name:'Справка',icon:'help'},
     ]">
-      <a :href="href" class="py-2 flex flex-row gap-4 items-center font-semibold">
+      <a :href="item.href" class="py-2 flex flex-row gap-4 items-center font-semibold hover:opacity-50">
         <img :src="`assets/icon-${item.icon}.svg`" width="16" height="16"/>
         <span :text="item.name"></span>
       </a>
     </li>
   </ul>
+</section>
+
+<section id="login" :if="login" class="popup flex flex-col items-center">
+  <a href="#close" :onclick.prevent="e => login = false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
+    <img src="./assets/logo.svg" class="h-20"/>
+    <span class="flex flex-col text-lg leading-tight ml-4">
+      ПРОСТО
+      <strong>GREEN</strong>
+    </span>
+  </a>
+
+  <h2 class="mt-24 mb-16" :text="signup ? 'Регистрация' : 'Вход в аккаунт'"></h2>
+
+  <nav class="flex flex-col gap-2 w-64">
+    <a href="" class="button h-10 flex flex-row items-center justify-center">Почта</a>
+    <a href="" class="button h-10 flex flex-row items-center justify-center">Телефон</a>
+    <div class="grid grid-cols-4 gap-2">
+      <a href="" class="button h-10 flex flex-row items-center justify-center">vk</a>
+      <a href="" class="button h-10 flex flex-row items-center justify-center">ok</a>
+      <a href="" class="button h-10 flex flex-row items-center justify-center">apple?</a>
+      <a href="" class="button h-10 flex flex-row items-center justify-center">google</a>
+    </div>
+    <br/>
+    <p :if="signup" class="text-sm text-center w-full">Есть аккаунт? <a href="#login" :onclick.prevent="e=>(signup=false)" class="text-green-500 hover:text-green-300">Войти</a></p>
+    <a :else href="#signup" :onclick.prevent="e=>(signup=true)" class="button h-10 flex flex-row items-center justify-center !shadow-none !border-none">Регистрация</a>
+  </nav>
+
+  <p class="text-sm text-center w-full mt-auto mb-8"><a href="terms" class="text-gray-400 hover:text-gray-300">Условия использования</a></p>
 </section>
 
 <main class="max-w-md mx-auto">{{ content }}</main>
