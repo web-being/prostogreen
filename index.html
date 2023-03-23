@@ -1,17 +1,7 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./dist/main.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sprae@5.1.0/sprae.auto.js" defer></script>
-  <!-- <script src="./node_modules/sprae/sprae.auto.js" defer></script> -->
-  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-</head>
+---
+layout: default
+title: Главная
+---
 
 
 <template :ref="bannerTpl">
@@ -89,205 +79,99 @@
 </template>
 
 
-<body class="max-w-md mx-auto font-medium text-gray-800" :with="{
-    likes: [],
-    like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
-  }">
-  <header class="flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
-    <a id="logo" class="" href="/">
-      <img class="w-12 h-12" src="./assets/logo.svg"/>
-    </a>
-    <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
-      <img class="block h-5" src="./assets/search.svg"/>
-      <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
-      <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="./assets/camera.svg"/></a>
-    </div>
-    <a id="menu" href="#menu" class="block ml-auto mr-2 hover:opacity-50">
-      <img class="block" src="./assets/menu.svg"/>
-    </a>
-  </header>
+<a href="#address" id="address" class="flex flex-row items-center p-4 gap-4 hover:text-gray-500 active:text-gray-400">
+  <svg class="opacity-90" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 9C13 11.2091 11.2091 13 9 13C6.79086 13 5 11.2091 5 9C5 6.79086 6.79086 5 9 5C11.2091 5 13 6.79086 13 9Z" stroke="currentColor" stroke-width="2"/>
+    <path d="M17 9C17 13.4183 11 21 9 21C7 21 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  <span :if="address">Верхне-Каменская улица, 9к1</span>
+  <span :else>Укажите адрес доставки</span>
+  <svg width="7" height="12" class="ml-auto opacity-50" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1.33301 1L5.74375 5.41074C6.06919 5.73618 6.06919 6.26382 5.74375 6.58926L1.33301 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</a>
 
-  <main>
-    <a href="#address" id="address" class="flex flex-row items-center p-4 gap-4 hover:text-gray-500 active:text-gray-400">
-      <svg class="opacity-90" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M13 9C13 11.2091 11.2091 13 9 13C6.79086 13 5 11.2091 5 9C5 6.79086 6.79086 5 9 5C11.2091 5 13 6.79086 13 9Z" stroke="currentColor" stroke-width="2"/>
-        <path d="M17 9C17 13.4183 11 21 9 21C7 21 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" stroke-width="2"/>
-      </svg>
-      <span :if="address">Верхне-Каменская улица, 9к1</span>
-      <span :else>Укажите адрес доставки</span>
-      <svg width="7" height="12" class="ml-auto opacity-50" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.33301 1L5.74375 5.41074C6.06919 5.73618 6.06919 6.26382 5.74375 6.58926L1.33301 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </a>
+<nav id="categories" class="flex flex-row py-4">
+  <a :each="item in [
+    {name:'Каталог',img:'list.svg',href:'/catalog'},
+    {name:'Растения',img:'leaf.svg',href:'/plants'},
+    {name:'Заказать услугу',img:'edit.svg',href:'/order'},
+    {name:'Акции',img:'lightning.svg',href:'/promo'},
+    {name:'Озелени страну',img:'plant.svg',href:'/greenery'}
+  ]" :href="item.href" class="flex flex-col text-xs leading-tight w-24 text-center items-center hover:text-gray-500 active:text-gray-400">
+    <img :src="`./assets/${item.img}`" class="border-2 border-green-600  hover:bg-green-50 p-2 mb-2 rounded-lg w-12 h-12 opacity-90 hover:opacity-70" />
+    <span class="" :text="item.name"></span>
+  </a>
+</nav>
 
-    <nav id="categories" class="flex flex-row py-4">
-      <a :each="item in [
-        {name:'Каталог',img:'list.svg',href:'/catalog'},
-        {name:'Растения',img:'leaf.svg',href:'/plants'},
-        {name:'Заказать услугу',img:'edit.svg',href:'/order'},
-        {name:'Акции',img:'lightning.svg',href:'/promo'},
-        {name:'Озелени страну',img:'plant.svg',href:'/greenery'}
-      ]" :href="item.href" class="flex flex-col text-xs leading-tight w-24 text-center items-center hover:text-gray-500 active:text-gray-400">
-        <img :src="`./assets/${item.img}`" class="border-2 border-green-600  hover:bg-green-50 p-2 mb-2 rounded-lg w-12 h-12 opacity-90 hover:opacity-70" />
-        <span class="" :text="item.name"></span>
-      </a>
-    </nav>
+<section id="banner-1" class="my-2" :render="bannerTpl" :with="{items: [
+  {img: 'promo-2.png'},
+  {img: 'promo-1.png'}
+]}"></section>
 
-    <section id="banner-1" class="my-2" :render="bannerTpl" :with="{items: [
-      {img: 'promo-2.png'},
-      {img: 'promo-1.png'}
-    ]}"></section>
+<section id="featured" :render="featuredTpl" :with="{items: [
+  {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
+  {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
+  {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
+  {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
+]}"></section>
 
-    <section id="featured" :render="featuredTpl" :with="{items: [
-      {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
-      {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
-      {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
-      {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
-    ]}"></section>
+<section id="apples" class="mx-3" :render="articlesTpl" :with="{
+  title: 'Яблони',
+  headerBg: 'banner-apples.png',
+  items: [
+  {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-1.png',price:450,rating:4,special:true},
+  {id:2,name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-2.png',price:450,rating:4.3,special:true},
+  {id:3,name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-3.png',price:450,rating:4,special:true},
+  {id:4,name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-4.png',price:450,rating:4.1},
+  {id:5,name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-5.png',price:389,rating:5},
+  {id:6,name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-6.png',price:380,rating:4},
+  {id:7,name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-7.png',price:389,rating:5},
+  {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
+]}"></section>
 
-    <section id="apples" class="mx-3" :render="articlesTpl" :with="{
-      title: 'Яблони',
-      headerBg: 'banner-apples.png',
-      items: [
-      {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-1.png',price:450,rating:4,special:true},
-      {id:2,name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-2.png',price:450,rating:4.3,special:true},
-      {id:3,name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-3.png',price:450,rating:4,special:true},
-      {id:4,name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-4.png',price:450,rating:4.1},
-      {id:5,name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-5.png',price:389,rating:5},
-      {id:6,name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-6.png',price:380,rating:4},
-      {id:7,name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-7.png',price:389,rating:5},
-      {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
-    ]}"></section>
-
-    <section id="roses" class="mx-3" :render="articlesTpl" :with="{
-      title: 'Розы',
-      headerBg: 'banner-roses.png',
-      items: [
-      {id:11,name:'Роза “Кофе брейк”',desc:`Роза Кофе брейк относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-1.png',price:450,rating:4,special:true},
-      {id:12,name:'Роза “Ностальгия”',desc:`Роза Ностальгия относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-2.png',price:450,rating:4,special:true},
-      {id:13,name:'Роза “Белла Вита”',desc:`Роза Белла Вита относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-3.png',price:450,rating:4,special:true},
-      {id:14,name:'Роза “Анастасия”',desc:`Роза Анастасия относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-4.png',price:450,rating:4},
-      {id:15,name:'Роза “Королевство”',desc:`Роза Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-5.png',price:389,rating:5},
-      {id:16,name:'Роза “Сусанна”',desc:`Роза Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-6.png',price:380,rating:4},
-      {id:17,name:'Роза “Шакира”',desc:`Роза Мельба относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-7.png',price:389,rating:5},
-      {id:18,name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
-      При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
-      Сорт яблони Мельба был выведен в Швеции.`,img:'roses-8.png',price:380,rating:4}
-    ]}"></section>
-  </main>
-
-  <footer id="site-footer" class="my-4 mx-4">
-    <hr class="my-4">
-    <div class="my-2 pt-2 flex flex-row">
-      <a id="logo" class="flex flex-row items-center justify-center" href="/">
-        <img src="./assets/logo.svg" class="h-12"/>
-        <span class="flex flex-col text-xs leading-none ml-2">
-          ПРОСТО
-          <strong>GREEN</strong>
-        </span>
-      </a>
-
-      <div class="ml-auto flex flex-row items-center gap-2">
-        <a href="/yandex">
-          <img src="./assets/yandex.svg">
-        </a>
-        <a href="/yandex">
-          <img src="./assets/vk.svg">
-        </a>
-      </div>
-    </div>
-
-    <nav class="flex flex-col items-start">
-      <h4 class="mt-4 mb-3">Продавцам</h4>
-
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Личный кабинет продавца</a>
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/feedback">Продавайте на Просто Green</a>
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/desktop">Документация для партнёров</a>
-
-      <h4 class="mt-4 mb-3">Садовникам</h4>
-
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
-
-      <h4 class="mt-4 mb-3">Перевозчикам</h4>
-
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Условия сотрудничества</a>
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Как работать с нами</a>
-
-      <h4 class="mt-4 mb-3">Сотрудничество</h4>
-
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Партнёрская программа</a>
-    </nav>
-
-    <hr class="my-4">
-
-    <nav class="flex flex-col items-start">
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/agreement">Пользовательское соглашение</a>
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/feedback">Обратная связь</a>
-      <a class="text-gray-400 hover:text-gray-300 text-sm pb-2" href="/desktop">Полная версия</a>
-    </nav>
-
-    <p class="text-sm text-gray-400 mt-8">© 2023 ООО «ПРОСТО ГРИН»</p>
-  </footer>
-
-  <nav class="sticky bottom-0 left-0 z-50 w-full h-16 bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-      <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg width="22" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.50033 21.8185V13.6519C7.50033 13.0075 8.02266 12.4852 8.66699 12.4852H13.3337C13.978 12.4852 14.5003 13.0075 14.5003 13.6519V21.8185M1.66699 19.4852V10.6663C1.66699 9.26663 2.29525 7.94086 3.37855 7.05452L9.52277 2.02743C10.3823 1.32419 11.6184 1.32419 12.4779 2.02743L18.6221 7.05452C19.7054 7.94086 20.3337 9.26664 20.3337 10.6663V19.4852C20.3337 20.7739 19.289 21.8185 18.0003 21.8185H15.667H6.33366H4.00033C2.71166 21.8185 1.66699 20.7739 1.66699 19.4852Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-            </svg>
-        </button>
-        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg width="19" height="23" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 19 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.8337 21.9163H4.29199C2.5661 21.9163 1.16699 20.5172 1.16699 18.7913M1.16699 18.7913C1.16699 17.0655 2.5661 15.6663 4.29199 15.6663H16.02C17.0217 15.6663 17.8337 14.8544 17.8337 13.8527V3.16634C17.8337 2.01575 16.9009 1.08301 15.7503 1.08301H4.29199C2.5661 1.08301 1.16699 2.48212 1.16699 4.20801V18.7913ZM15.7503 15.6663V21.9163M5.33366 1.08301V15.6663" stroke="#222222" stroke-width="1.81362" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg width="29" height="28" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.5 2H2.40948C3.94041 2 5.22575 3.15275 5.39178 4.67466L6.60822 15.8253C6.77425 17.3472 8.05959 18.5 9.59053 18.5H22.569C23.9404 18.5 25.1371 17.5701 25.476 16.2413L27.5459 8.12466C28.0296 6.22781 26.5965 4.38333 24.6389 4.38333H6.9M6.93713 23.9374H8.06213M6.93713 25.0624H8.06213M23.4371 23.9374H24.5621M23.4371 25.0624H24.5621M9 24.5C9 25.3284 8.32843 26 7.5 26C6.67157 26 6 25.3284 6 24.5C6 23.6716 6.67157 23 7.5 23C8.32843 23 9 23.6716 9 24.5ZM25.5 24.5C25.5 25.3284 24.8284 26 24 26C23.1716 26 22.5 25.3284 22.5 24.5C22.5 23.6716 23.1716 23 24 23C24.8284 23 25.5 23.6716 25.5 24.5Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg width="24" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M11.9928 3.9025C9.89349 1.45598 6.39273 0.797875 3.76243 3.03816C1.13213 5.27844 0.761816 9.02407 2.82741 11.6737C4.54481 13.8766 9.74226 18.5228 11.4457 20.0266C11.6363 20.1948 11.7316 20.279 11.8427 20.312C11.9397 20.3409 12.0459 20.3409 12.1429 20.312C12.254 20.279 12.3493 20.1948 12.5399 20.0266C14.2434 18.5228 19.4408 13.8766 21.1582 11.6737C23.2238 9.02407 22.8987 5.25487 20.2232 3.03816C17.5477 0.82144 14.0921 1.45598 11.9928 3.9025Z" stroke="#222222" stroke-width="2.03125" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span :if="likes.length" :text="likes.length" class="absolute w-4 h-4 top-3 right-6 flex flex-row text-center items-center justify-center text-xs bg-red-500 rounded-full text-white"></span>
-        </button>
-        <button type="button" class="inline-flex relative flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-          <svg width="22" height="22" class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11.0003 13.3337C14.222 13.3337 16.8337 10.722 16.8337 7.50033C16.8337 4.27866 14.222 1.66699 11.0003 1.66699C7.77866 1.66699 5.16699 4.27866 5.16699 7.50033C5.16699 10.722 7.77866 13.3337 11.0003 13.3337ZM11.0003 13.3337C5.84567 13.3337 1.66699 16.4677 1.66699 20.3337M11.0003 13.3337C16.155 13.3337 20.3337 16.4677 20.3337 20.3337" stroke="#222222" stroke-width="2.03125" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-  </nav>
-</body>
-</html>
+<section id="roses" class="mx-3" :render="articlesTpl" :with="{
+  title: 'Розы',
+  headerBg: 'banner-roses.png',
+  items: [
+  {id:11,name:'Роза “Кофе брейк”',desc:`Роза Кофе брейк относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-1.png',price:450,rating:4,special:true},
+  {id:12,name:'Роза “Ностальгия”',desc:`Роза Ностальгия относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-2.png',price:450,rating:4,special:true},
+  {id:13,name:'Роза “Белла Вита”',desc:`Роза Белла Вита относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-3.png',price:450,rating:4,special:true},
+  {id:14,name:'Роза “Анастасия”',desc:`Роза Анастасия относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-4.png',price:450,rating:4},
+  {id:15,name:'Роза “Королевство”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-5.png',price:389,rating:5},
+  {id:16,name:'Роза “Сусанна”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-6.png',price:380,rating:4},
+  {id:17,name:'Роза “Шакира”',desc:`Роза Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-7.png',price:389,rating:5},
+  {id:18,name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'roses-8.png',price:380,rating:4}
+]}"></section>
