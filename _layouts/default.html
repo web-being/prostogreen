@@ -144,11 +144,6 @@
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
   </a>
-  <a href="#back" :if="login!='login'" class="absolute top-6 left-6 text-gray-500">
-    <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  </a>
 
   <div :if="login=='login'" class="h-full flex flex-col">
     <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
@@ -213,6 +208,11 @@
   </div>
 
   <div :if="login=='email'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Вход</h2>
     <form class="flex flex-col gap-3 w-72">
       <input class="input h-10" type="email" placeholder="Почта"/>
@@ -222,6 +222,11 @@
     </form>
   </div>
   <div :if="login=='forgot-pass'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='email'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Восстановить пароль</h2>
     <form class="flex flex-col gap-3 w-72">
       <input class="input h-10" type="email" placeholder="Почта"/>
@@ -229,6 +234,11 @@
     </form>
   </div>
   <div :if="login=='email-sent'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='forgot-pass'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Письмо отправлено</h2>
     <form class="flex flex-col gap-3 w-72">
       <p class="text-sm text-center w-full mt-auto mb-8">Мы отправили письмо с инструкцией для смены пароля</p>
@@ -237,6 +247,11 @@
   </div>
 
   <div :if="login=='phone'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <form class="flex flex-col gap-3 w-72">
       <h2 class="mt-24 mb-8 text-lg font-semibold">Введите номер телефона</h2>
       <p class="text-sm text-center w-full mb-8 text-gray-400">Мы отправим вам код в СМС</p>
@@ -245,6 +260,11 @@
     </form>
   </div>
   <div :if="login=='enter-code'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Введите код</h2>
     <form class="flex flex-col gap-3 w-72">
       <p class="text-sm text-center w-full mb-4 text-gray-400">Мы отправили код подтверждения на <span class="whitespace-nowrap">+7 999 683 52 92</span></p>
@@ -256,6 +276,11 @@
 
 
   <div :if="login=='signup-email'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='signup'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Регистрация</h2>
     <form class="flex flex-col gap-3 w-72">
       <input class="input h-10" type="text" placeholder="Имя"/>
@@ -265,6 +290,11 @@
     </form>
   </div>
   <div :if="login=='signup-email-sent'" class="h-full flex flex-col items-center">
+    <a href="#back" :onclick.prevent="e=>login='signup-email'" class="absolute top-6 left-6 text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
     <h2 class="mt-24 mb-8 text-lg font-semibold">Письмо отправлено</h2>
     <form class="flex flex-col gap-3 w-72">
       <p class="text-sm text-center w-full mt-auto mb-8">Мы отправили письмо со ссылкой на подтверждение на ******@gmail.com</p>
