@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+  @apply flex flex-row items-center text-white w-auto bg-gradient-to-b focus:ring-4 focus:outline-none rounded-lg py-1 leading-snug tracking-wide text-sm text-center px-3 whitespace-nowrap from-green-300 to-green-500 hover:from-green-200 hover:to-green-400 focus:ring-green-300;
+}
+.button-primary {
+  @apply from-red-300 to-red-500 hover:from-red-200 hover:to-red-400 focus:ring-red-300 -rotate-2;
+}
+
+.popup {
+  @apply max-w-md mx-auto px-4 fixed bg-white z-50 w-full h-full inset-0;
+}
