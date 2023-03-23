@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prostogreen: {{ page.title }}</title>
-  <link href="./dist/main.css" rel="stylesheet">
+  <link href="{{ './dist/main.css' | relative_url }}" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
@@ -98,15 +98,15 @@
 }">
 <header class="max-w-md mx-auto flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
   <a id="logo" class="" href="/">
-    <img class="w-12 h-12" src="./assets/logo.svg"/>
+    <img class="w-12 h-12" src="{{ './assets/logo.svg' | relative_url }}"/>
   </a>
   <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
-    <img class="block h-5" src="./assets/icon-search.svg"/>
+    <img class="block h-5" src="{{ './assets/icon-search.svg' | relative_url }}"/>
     <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
-    <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="./assets/icon-camera.svg"/></a>
+    <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="{{ './assets/icon-camera.svg' | relative_url }}"/></a>
   </div>
   <a id="menu" href="#menu" :onclick.prevent="e=>menu=true" class="block ml-auto mr-2 hover:opacity-50">
-    <img class="block" src="./assets/icon-menu.svg"/>
+    <img class="block" src="{{ './assets/icon-menu.svg' | relative_url }}"/>
   </a>
 </header>
 
@@ -147,7 +147,7 @@
 
   <div :if="login=='login'" class="h-full flex flex-col">
     <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
-      <img src="./assets/logo.svg" class="h-20"/>
+      <img src="{{ './assets/logo.svg' | relative_url }}" class="h-20"/>
       <span class="flex flex-col text-lg leading-tight ml-4">
         ПРОСТО
         <strong>GREEN</strong>
@@ -178,7 +178,7 @@
 
   <div :if="login=='signup'" class="h-full flex flex-col">
     <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
-      <img src="./assets/logo.svg" class="h-20"/>
+      <img src="{{ './assets/logo.svg' | relative_url }}" class="h-20"/>
       <span class="flex flex-col text-lg leading-tight ml-4">
         ПРОСТО
         <strong>GREEN</strong>
@@ -303,13 +303,13 @@
   </div>
 </section>
 
-<main class="max-w-md mx-auto">{{ content }}</main>
+<main class="max-w-md mx-auto py-4">{{ content }}</main>
 
 <footer id="site-footer" class="max-w-md mx-auto my-4 px-4">
   <hr class="my-4">
   <div class="my-2 pt-2 flex flex-row">
     <a id="logo" class="flex flex-row items-center justify-center" href="/">
-      <img src="./assets/logo.svg" class="h-12"/>
+      <img src="{{ './assets/logo.svg' | relative_url }}" class="h-12"/>
       <span class="flex flex-col text-xs leading-none ml-2">
         ПРОСТО
         <strong>GREEN</strong>
@@ -318,10 +318,10 @@
 
     <div class="ml-auto flex flex-row items-center gap-2">
       <a href="/yandex">
-        <img src="./assets/yandex.svg">
+        <img src="{{ './assets/yandex.svg' | relative_url }}">
       </a>
       <a href="/yandex">
-        <img src="./assets/vk.svg">
+        <img src="{{ './assets/vk.svg' | relative_url }}">
       </a>
     </div>
   </div>
