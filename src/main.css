@@ -12,6 +12,10 @@
   @apply text-white hover:text-white bg-gradient-to-b from-red-300 to-red-500 hover:from-red-200 hover:to-red-400 focus:ring-red-300 -rotate-2 border-none;
 }
 
+.input {
+  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400
+}
+
 .popup {
   @apply max-w-md mx-auto px-4 fixed bg-white z-50 w-full h-full inset-0;
 }
