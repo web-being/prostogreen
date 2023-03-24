@@ -1,7 +1,9 @@
 ---
-layout: default
 title: Каталог
 ---
+
+{% include head.html %}
+<main class="max-w-md mx-auto">
 
 <h1 class="text-xl font-semibold mt-8 mb-4">Каталог</h1>
 <ul class="mx-3 my-2 text-gray-800 text-sm list-none divide-y" :with="{ categories: [
@@ -41,3 +43,6 @@ title: Каталог
     <a :href="category.name" :text="category.name" class="hover:text-gray-400"></a>
   </li>
 </ul>
+
+</main>
+{% include foot.html %}
