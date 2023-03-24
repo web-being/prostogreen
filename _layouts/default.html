@@ -97,7 +97,7 @@
   like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
 }">
 <header class="max-w-md mx-auto flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
-  <a id="logo" class="" href="/">
+  <a id="logo" class="" href="{{ '/' | relative_url }}">
     <img class="w-12 h-12" src="{{ './assets/logo.svg' | relative_url }}"/>
   </a>
   <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">

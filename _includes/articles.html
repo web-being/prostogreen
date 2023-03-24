@@ -1,5 +1,4 @@
 <section id="apples" class="mx-3">
-  {{ include.collection }}
   <div class="h-20 px-4 my-4 rounded-lg shadow-md w-full bg-right bg-cover bg-no-repeat flex items-center" style="background-image: url(./assets/{{ include.headerBg }})">
     <h2 class="text-3xl font-medium text-white">{{ include.title }}</h2>
   </div>
@@ -12,12 +11,12 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99538 3.43711C6.64581 1.86435 4.39533 1.44128 2.70442 2.88146C1.01351 4.32164 0.775453 6.72955 2.10333 8.43286C3.20738 9.84904 6.5486 12.8359 7.64367 13.8026C7.76618 13.9108 7.82744 13.9648 7.89889 13.9861C7.96126 14.0046 8.0295 14.0046 8.09186 13.9861C8.16331 13.9648 8.22457 13.9108 8.34709 13.8026C9.44216 12.8359 12.7834 9.84904 13.8874 8.43286C15.2153 6.72955 15.0063 4.30649 13.2863 2.88146C11.5664 1.45643 9.34494 1.86435 7.99538 3.43711Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
-      <a href="{{ item.url }}" class="block h-52">
+      <a href="{{ item.url | relative_url }}" class="block h-52">
         <img src="./assets/{{ item.img }}" class="w-full max-h-full object-cover rounded-lg" />
       </a>
       <div class="bg-white rounded-md p-2 mt-1">
         <h3 class="inline-block leading-none mb-2 mt-1 px-1 py-1 font-semibold whitespace-nowrap {% if item.special %}bg-repeat bg-stripes rounded-md text-white text-lg{% else %}text-xl{% endif %}">{{ item.price }} ₽</h3>
-        <a href="{{ item.url }}"><h4 class="text-base mb-1 leading-tight font-semibold">{{ item.name }}</h4></a>
+        <a href="{{ item.url | relative_url }}"><h4 class="text-base mb-1 leading-tight font-semibold">{{ item.name }}</h4></a>
         <p class="text-xs line-clamp-4">{{ item.content | strip_html }}</p>
       </div>
       <div class="flex flex-row items-center gap-2 mt-auto">
