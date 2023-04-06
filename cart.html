@@ -1,0 +1,30 @@
+---
+title: Корзина
+---
+
+{% include head.html %}
+
+<main class="max-w-md mx-auto relative">
+  <a href="/" class="absolute -top-6 left-3 text-gray-500">
+    <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </a>
+
+  <div class="mt-8 mx-3">
+    <h1 class="font-semibold text-lg">Корзина</h1>
+
+    <article :each="item, id in [
+      {name:'AAA'},
+      {name:'BBB'},
+      {name:'CCC'},
+    ]"></article>
+
+    <h2 class="font-semibold text-lg">Способ получения</h2>
+    <h2 class="font-semibold text-lg">Покупатель и получатель</h2>
+    <h2 class="font-semibold text-lg">К оплате</h2>
+    <h2 class="font-semibold text-lg">Способ оплаты</h2>
+  </div>
+</main>
+
+{% include foot.html %}
