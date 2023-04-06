@@ -23,3 +23,17 @@ a. github/include-element
 b. jekyll _includes
   + no js-side problems
   + keeps static websites going
+
+### Frontend interaction
+
+1. CSHTML fully, js makes parts dynamic
+- too many pages
+- problematic for multiple interactions
+
+2. JSON-LD, js makes markup
+- too many origin pages
++ good for multiple interactions
+
+3.
+
+4.

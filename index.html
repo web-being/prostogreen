@@ -3,6 +3,7 @@ title: Главная
 ---
 
 {% include head.html %}
+{% include templates.html %}
 
 <main class="max-w-md mx-auto">
 
@@ -36,14 +37,12 @@ title: Главная
   {img: 'promo-1.png'}
 ]}"></section>
 
-<section id="featured" :render="featuredTpl" :with="{items: [
+<section id="featured" :render="featuredTpl" :with="{title: 'Успей купить', items: [
   {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
   {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
   {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
   {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
 ]}"></section>
-
-<!-- {% include articles.html collection="apples" headerBg="banner-apples.png" title="Яблони" %} -->
 
 <section id="apples" class="mx-3" :render="articlesTpl" :with="{
   title: 'Яблони',
@@ -103,6 +102,18 @@ title: Главная
   {id:18,name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
   При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
   Сорт яблони Мельба был выведен в Швеции.`,img:'roses-8.png',price:380,rating:4}
+]}"></section>
+
+<section id="banner-2" class="my-4" :render="bannerTpl" :with="{items: [
+  {img: 'promo-2.png'},
+  {img: 'promo-1.png'}
+]}"></section>
+
+<section id="for-you" :render="featuredTpl" :with="{title: 'Для вас', items: [
+  {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
+  {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
+  {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
+  {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
 ]}"></section>
 
 </main>
