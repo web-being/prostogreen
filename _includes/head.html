@@ -19,13 +19,14 @@
   menu: false,
   login: false,
   address: '',
+  map: false,
   like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
 }">
-<header class="max-w-md mx-auto flex flex-row items-center p-2 gap-4 sticky border-b border-gray-200 bg-white top-0 z-30">
+<header class="max-w-md mx-auto flex flex-row items-center p-2 gap-4 h-14 sticky border-b border-gray-200 bg-white top-0 z-30">
   <a id="logo" class="" href="{{ '/' | relative_url }}">
     <img class="w-12 h-12" src="{{ './assets/logo.svg' | relative_url }}"/>
   </a>
-  <div id="search" class="relative bg-slate-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
+  <div id="search" class="relative bg-gray-100 rounded-md w-full h-9 flex items-center px-2 gap-2">
     <img class="block h-5" src="{{ './assets/icon-search.svg' | relative_url }}"/>
     <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
     <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="{{ './assets/icon-camera.svg' | relative_url }}"/></a>
@@ -228,4 +229,68 @@
   </div>
 </section>
 
-<main class="max-w-md mx-auto">
+<section id="map" :if="map" class="popup flex flex-col">
+  <header class="flex gap-4 h-14 items-center flex-shrink-0">
+    <div id="address" class="relative bg-gray-100 rounded-md w-full h-9 flex items-center px-4 gap-2">
+      <input class="bg-transparent w-full outline-none text-sm" placeholder="Укажите адрес"/>
+    </div>
+    <a href="#close" :onclick.prevent="e => map=false" class="flex-shrink-0 text-gray-600 text-xs">
+      Отменить
+    </a>
+  </header>
+  <div id="map-container" class="bg-gray-200 rounded-md mt-6 mb-8 h-full">
+  </div>
+  <button class="button button-green h-10 font-medium absolute bottom-16 !px-16 mx-auto left-0 right-0 !w-fit">Добавить адрес</button>
+
+  <script type="text/javascript">
+    function initMap() {
+      // Basic options for a simple Google Map
+      // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+      var mapOptions = {
+        // How zoomed in you want the map to start at (always required)
+        zoom: 13,
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false,
+        backgroundColor: '#131314',
+
+        // The latitude and longitude to center the map (always required)
+        center: new google.maps.LatLng(59.9030742,30.3732213),
+
+        // How you would like to style the map.
+        // This is where you would paste any style found on Snazzy Maps.
+        // styles: [{"stylers":[{"visibility":"simplified"}]},{"stylers":[{"color":"#131314"}]},{"featureType":"water","stylers":[{"color":"#131313"},{"lightness":7}]},{"elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":25}]}]
+      };
+
+      // Get the HTML DOM element that will contain your map
+      // We are using a div with id="map" seen below in the <body>
+      var mapElement = document.getElementById('map-container');
+      console.log(mapElement)
+
+      // Create the Google Map using our element and options defined above
+      var map = new google.maps.Map(mapElement, mapOptions);
+
+      // Let's also add a marker while we're at it
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(59.9030742,30.3732213),
+        map: map,
+        title: 'PROAKPP'
+      });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: 'XXX'
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
+      map.panBy(200, -150);
+      setTimeout(function () {
+        infowindow.open(map, marker);
+      }, 1000)
+    }
+  </script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDh1gTWO5V-HZl2T_9iXLCDPcuLt8aXNc&callback=initMap"></script>
+</section>
