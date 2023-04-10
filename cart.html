@@ -11,52 +11,81 @@ title: Корзина
     </svg>
   </a>
 
-  <h1 class="font-semibold text-xl mb-3 mt-6">Корзина</h1>
+  <section id="cart-list"></section>
+    <h2 class="font-semibold text-xl mb-3 mt-6">Корзина</h2>
 
-  <article :each="item, id in [
-    {name:'Лилабринтус',amount:2,price:540,img:'apples-1.png'},
-    {name:'Крысокарпус',amount:1,price:108,img:'featured-1.png'},
-    {name:'Шелколистка',amount:3,price:432,img:'roses-1.png'},
-  ]" class="bg-gray-50 rounded-lg p-3 mb-4">
-    <div class="bg-white rounded-md flex flex-row items-center relative gap-3 p-3">
-      <input type="checkbox" class="checkbox">
-      <img class="bg-gray-300 rounded-md w-[4.5rem] h-24 object-cover" :src="'./assets/' + item.img" />
-      <button class="absolute top-6 right-4 text-gray-400">
-        <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5.25 6.5C5.25 6.08579 4.91421 5.75 4.5 5.75C4.08579 5.75 3.75 6.08579 3.75 6.5H5.25ZM3.75 12.5C3.75 12.9142 4.08579 13.25 4.5 13.25C4.91421 13.25 5.25 12.9142 5.25 12.5H3.75ZM8.25 6.5C8.25 6.08579 7.91421 5.75 7.5 5.75C7.08579 5.75 6.75 6.08579 6.75 6.5H8.25ZM6.75 12.5C6.75 12.9142 7.08579 13.25 7.5 13.25C7.91421 13.25 8.25 12.9142 8.25 12.5H6.75ZM2.31901 14.5865L2.65951 13.9183H2.65951L2.31901 14.5865ZM1.66349 13.931L2.33175 13.5905L2.33175 13.5905L1.66349 13.931ZM10.3365 13.931L9.66825 13.5905V13.5905L10.3365 13.931ZM9.68099 14.5865L9.34049 13.9183H9.34049L9.68099 14.5865ZM0.75 3.5C0.335786 3.5 0 3.83579 0 4.25C0 4.66421 0.335786 5 0.75 5V3.5ZM11.25 5C11.6642 5 12 4.66421 12 4.25C12 3.83579 11.6642 3.5 11.25 3.5V5ZM2.625 4.25C2.625 4.66421 2.96079 5 3.375 5C3.78921 5 4.125 4.66421 4.125 4.25H2.625ZM7.875 4.25C7.875 4.66421 8.21079 5 8.625 5C9.03921 5 9.375 4.66421 9.375 4.25H7.875ZM3.75 6.5V12.5H5.25V6.5H3.75ZM6.75 6.5V12.5H8.25V6.5H6.75ZM9.75 4.25V12.35H11.25V4.25H9.75ZM8.1 14H3.9V15.5H8.1V14ZM0.75 4.25V12.35H2.25V4.25H0.75ZM3.9 14C3.46758 14 3.18838 13.9994 2.97588 13.9821C2.77213 13.9654 2.69659 13.9372 2.65951 13.9183L1.97852 15.2548C2.26231 15.3994 2.55722 15.4528 2.85373 15.4771C3.14148 15.5006 3.49234 15.5 3.9 15.5V14ZM0.75 12.35C0.75 12.7577 0.749417 13.1085 0.772927 13.3963C0.797153 13.6928 0.85064 13.9877 0.995236 14.2715L2.33175 13.5905C2.31285 13.5534 2.28459 13.4779 2.26795 13.2741C2.25058 13.0616 2.25 12.7824 2.25 12.35H0.75ZM2.65951 13.9183C2.51838 13.8463 2.40365 13.7316 2.33175 13.5905L0.995235 14.2715C1.21095 14.6948 1.55516 15.0391 1.97852 15.2548L2.65951 13.9183ZM9.75 12.35C9.75 12.7824 9.74942 13.0616 9.73205 13.2741C9.71541 13.4779 9.68715 13.5534 9.66825 13.5905L11.0048 14.2715C11.1494 13.9877 11.2028 13.6928 11.2271 13.3963C11.2506 13.1085 11.25 12.7577 11.25 12.35H9.75ZM8.1 15.5C8.50766 15.5 8.85852 15.5006 9.14627 15.4771C9.44278 15.4528 9.73769 15.3994 10.0215 15.2548L9.34049 13.9183C9.30341 13.9372 9.22787 13.9654 9.02412 13.9821C8.81162 13.9994 8.53241 14 8.1 14V15.5ZM9.66825 13.5905C9.59635 13.7316 9.48162 13.8463 9.34049 13.9183L10.0215 15.2548C10.4448 15.0391 10.789 14.6948 11.0048 14.2715L9.66825 13.5905ZM0.75 5H1.5V3.5H0.75V5ZM1.5 5H10.5V3.5H1.5V5ZM10.5 5H11.25V3.5H10.5V5ZM4.125 3.65C4.125 2.80057 4.89979 2 6 2V0.5C4.20071 0.5 2.625 1.84846 2.625 3.65H4.125ZM6 2C7.10021 2 7.875 2.80057 7.875 3.65H9.375C9.375 1.84846 7.79929 0.5 6 0.5V2ZM2.625 3.65V4.25H4.125V3.65H2.625ZM7.875 3.65V4.25H9.375V3.65H7.875Z" fill="currentColor"/>
-        </svg>
-      </button>
-      <div class="flex flex-col">
-        <header class="flex flex-col">
-          <h4 class="text-md mt-0 font-semibold text-gray-800" :text="item.name"></h4>
-          <p class="text-xs text-gray-400" :text="item.amount + ` шт.`"></p>
-        </header>
-        <p class="mt-4 text-gray-800 font-semibold" :text="item.price + ' ₽'"></p>
+    <article :each="item, id in [
+      {name:'Лилабринтус',amount:2,price:540,img:'apples-1.png'},
+      {name:'Крысокарпус',amount:1,price:108,img:'featured-1.png'},
+      {name:'Шелколистка',amount:3,price:432,img:'roses-1.png'},
+    ]" class="bg-gray-50 rounded-lg p-3 mb-4">
+      <div class="bg-white rounded-md flex flex-row items-center relative gap-3 p-3">
+        <input type="checkbox" class="checkbox" checked>
+        <img class="bg-gray-300 rounded-md w-[4.5rem] h-24 object-cover" :src="'./assets/' + item.img" />
+        <button class="absolute top-6 right-4 text-gray-400">
+          <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.25 6.5C5.25 6.08579 4.91421 5.75 4.5 5.75C4.08579 5.75 3.75 6.08579 3.75 6.5H5.25ZM3.75 12.5C3.75 12.9142 4.08579 13.25 4.5 13.25C4.91421 13.25 5.25 12.9142 5.25 12.5H3.75ZM8.25 6.5C8.25 6.08579 7.91421 5.75 7.5 5.75C7.08579 5.75 6.75 6.08579 6.75 6.5H8.25ZM6.75 12.5C6.75 12.9142 7.08579 13.25 7.5 13.25C7.91421 13.25 8.25 12.9142 8.25 12.5H6.75ZM2.31901 14.5865L2.65951 13.9183H2.65951L2.31901 14.5865ZM1.66349 13.931L2.33175 13.5905L2.33175 13.5905L1.66349 13.931ZM10.3365 13.931L9.66825 13.5905V13.5905L10.3365 13.931ZM9.68099 14.5865L9.34049 13.9183H9.34049L9.68099 14.5865ZM0.75 3.5C0.335786 3.5 0 3.83579 0 4.25C0 4.66421 0.335786 5 0.75 5V3.5ZM11.25 5C11.6642 5 12 4.66421 12 4.25C12 3.83579 11.6642 3.5 11.25 3.5V5ZM2.625 4.25C2.625 4.66421 2.96079 5 3.375 5C3.78921 5 4.125 4.66421 4.125 4.25H2.625ZM7.875 4.25C7.875 4.66421 8.21079 5 8.625 5C9.03921 5 9.375 4.66421 9.375 4.25H7.875ZM3.75 6.5V12.5H5.25V6.5H3.75ZM6.75 6.5V12.5H8.25V6.5H6.75ZM9.75 4.25V12.35H11.25V4.25H9.75ZM8.1 14H3.9V15.5H8.1V14ZM0.75 4.25V12.35H2.25V4.25H0.75ZM3.9 14C3.46758 14 3.18838 13.9994 2.97588 13.9821C2.77213 13.9654 2.69659 13.9372 2.65951 13.9183L1.97852 15.2548C2.26231 15.3994 2.55722 15.4528 2.85373 15.4771C3.14148 15.5006 3.49234 15.5 3.9 15.5V14ZM0.75 12.35C0.75 12.7577 0.749417 13.1085 0.772927 13.3963C0.797153 13.6928 0.85064 13.9877 0.995236 14.2715L2.33175 13.5905C2.31285 13.5534 2.28459 13.4779 2.26795 13.2741C2.25058 13.0616 2.25 12.7824 2.25 12.35H0.75ZM2.65951 13.9183C2.51838 13.8463 2.40365 13.7316 2.33175 13.5905L0.995235 14.2715C1.21095 14.6948 1.55516 15.0391 1.97852 15.2548L2.65951 13.9183ZM9.75 12.35C9.75 12.7824 9.74942 13.0616 9.73205 13.2741C9.71541 13.4779 9.68715 13.5534 9.66825 13.5905L11.0048 14.2715C11.1494 13.9877 11.2028 13.6928 11.2271 13.3963C11.2506 13.1085 11.25 12.7577 11.25 12.35H9.75ZM8.1 15.5C8.50766 15.5 8.85852 15.5006 9.14627 15.4771C9.44278 15.4528 9.73769 15.3994 10.0215 15.2548L9.34049 13.9183C9.30341 13.9372 9.22787 13.9654 9.02412 13.9821C8.81162 13.9994 8.53241 14 8.1 14V15.5ZM9.66825 13.5905C9.59635 13.7316 9.48162 13.8463 9.34049 13.9183L10.0215 15.2548C10.4448 15.0391 10.789 14.6948 11.0048 14.2715L9.66825 13.5905ZM0.75 5H1.5V3.5H0.75V5ZM1.5 5H10.5V3.5H1.5V5ZM10.5 5H11.25V3.5H10.5V5ZM4.125 3.65C4.125 2.80057 4.89979 2 6 2V0.5C4.20071 0.5 2.625 1.84846 2.625 3.65H4.125ZM6 2C7.10021 2 7.875 2.80057 7.875 3.65H9.375C9.375 1.84846 7.79929 0.5 6 0.5V2ZM2.625 3.65V4.25H4.125V3.65H2.625ZM7.875 3.65V4.25H9.375V3.65H7.875Z" fill="currentColor"/>
+          </svg>
+        </button>
+        <div class="flex flex-col">
+          <header class="flex flex-col">
+            <h4 class="text-md mt-0 font-semibold text-gray-800" :text="item.name"></h4>
+            <p class="text-xs text-gray-400" :text="item.amount + ` шт.`"></p>
+          </header>
+          <p class="mt-4 text-gray-800 font-semibold" :text="item.price + ' ₽'"></p>
+        </div>
+        <div class="bg-gray-100 rounded-md absolute right-4 bottom-4 py-1 px-2 flex flex-row gap-3 text-base">
+          <button>−</button>
+          <span :text="item.amount"></span>
+          <button>+</button>
+        </div>
       </div>
-      <div class="bg-gray-100 rounded-md absolute right-4 bottom-4 py-1 px-2 flex flex-row gap-3 text-base">
-        <button>−</button>
-        <span :text="item.amount"></span>
-        <button>+</button>
+    </article>
+  </section>
+
+  <section id="delivery" :with="{pickup:false}">
+    <h2 class="font-semibold text-xl mt-6">Способ получения</h2>
+    <div class="grid grid-cols-2 gap-3 my-3">
+      <a href="#login-email" class="button !text-base h-10 flex flex-row items-center justify-center" :class="pickup ? '' : '!text-black'" :onclick.prevent="e => pickup=true">Самовывоз</a>
+      <a href="#login-phone" class="button !text-base h-10 flex flex-row items-center justify-center" :class="pickup ? '!text-black' : ''" :onclick.prevent="e => pickup=false">Доставка</a>
+    </div>
+
+    <div :if="pickup" class="bg-gray-50 rounded-lg p-3 mb-6 text-base flex flex-col gap-3 mt-6">
+      <div class="bg-white rounded-md p-3">
+        <h2 class="font-semibold">Из питомника “Диво Сад”</h2>
+        <p class="text-xs mt-2">Сегодня и позже – 0 ₽</p>
+      </div>
+      <div class="bg-white rounded-md p-3 text-xs leading-tight">
+        <p>Всеволожский район, Заневское городское поселение, массив Кудрово, 69, Санкт-Петербург, Ленинградская обл.</p>
+        <p class="mt-2"><strong>С 18 марта с 10:00 - 20:00</strong></p>
       </div>
     </div>
-  </article>
 
-  <h2 class="font-semibold text-xl mt-6">Способ получения</h2>
-  <div class="grid grid-cols-2 gap-3 my-3">
-    <a href="#login-email" class="button !text-base h-10 flex flex-row items-center justify-center">Самовывоз</a>
-    <a href="#login-phone" class="button !text-base h-10 flex flex-row items-center justify-center !text-black">Доставка</a>
-  </div>
-
-  <div class="bg-gray-50 rounded-lg p-3 mb-6 text-base flex flex-col gap-3 mt-6">
-    <div class="bg-white rounded-md p-3">
-      <h2 class="font-semibold">Из питомника “Диво Сад”</h2>
-      <p class="text-xs mt-2">Сегодня и позже – 0 ₽</p>
+    <div :else>
+      <div class="bg-gray-50 rounded-lg p-3 mb-3 text-base flex flex-col gap-3 mt-6">
+        <button class="bg-white rounded-md overflow-hidden p-3 shadow-md relative text-left">
+          <h2 class="font-semibold">Доставка курьером</h2>
+          <p class="text-xs mt-2">Сегодня, завтра и позже</p>
+          <svg class="absolute top-0 bottom-0 right-4 my-auto" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.33398 1L5.74473 5.41074C6.07017 5.73618 6.07017 6.26382 5.74473 6.58926L1.33398 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <h2 class="font-semibold text-lg">Адрес доставки</h2>
+      <div class="bg-gray-50 rounded-lg p-3 mb-6 text-base flex flex-col gap-3 mt-3">
+        <button class="bg-white rounded-md overflow-hidden p-3 shadow-md relative flex flex-row gap-3">
+          <svg class="opacity-90" width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 9C13 11.2091 11.2091 13 9 13C6.79086 13 5 11.2091 5 9C5 6.79086 6.79086 5 9 5C11.2091 5 13 6.79086 13 9Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M17 9C17 13.4183 11 21 9 21C7 21 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span class="text-sm font-medium">Верхне-Каменская улица, 9к1</span>
+          <svg class="absolute top-0 bottom-0 right-4 my-auto" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.33398 1L5.74473 5.41074C6.07017 5.73618 6.07017 6.26382 5.74473 6.58926L1.33398 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="bg-white rounded-md p-3 text-xs leading-tight">
-      <p>Всеволожский район, Заневское городское поселение, массив Кудрово, 69, Санкт-Петербург, Ленинградская обл.</p>
-      <p class="mt-2"><strong>С 18 марта с 10:00 - 20:00</strong></p>
-    </div>
-  </div>
+  </section>
 
   <section id="recipient" :with="{another:false}">
     <label for="another-recipient" class="flex flex-row shadow-md p-3 items-center border-gray-50 border bg-white rounded-md gap-3">
