@@ -43,7 +43,7 @@ title: Корзина
     </article>
   </section>
 
-  <section id="delivery" :with="{pickup:false, newAddress:false}">
+  <section id="delivery" :with="{pickup:false, newAddress:false, anotherRecipient:false}">
     <h2 class="font-semibold text-xl mt-6">Способ получения</h2>
     <div class="grid grid-cols-2 gap-3 my-3">
       <a href="#login-email" class="button !text-base h-10 flex flex-row items-center justify-center" :class="pickup ? '' : '!text-black'" :onclick.prevent="e => pickup=true">Самовывоз</a>
@@ -60,7 +60,6 @@ title: Корзина
         <p class="mt-2"><strong>С 18 марта с 10:00 - 20:00</strong></p>
       </div>
     </div>
-
     <div :else>
       <div class="bg-gray-50 rounded-lg p-3 mb-3 text-base gap-3 mt-6" :with="{select:false}">
         <div class="relative w-full flex flex-col">
@@ -134,31 +133,37 @@ title: Корзина
         </div>
       </div>
 
-      <div :if="newAddress" class="bg-gray-50 rounded-lg p-3 mb-4 text-base flex flex-col gap-3 mt-3">
-        <div class="flex flex-col gap-3">
-          <input class="input !bg-white" type="text" placeholder="Укажите адрес"/>
-          <div class="flex flex-row gap-2">
-            <input class="input !bg-white !w-1/4" type="text" placeholder="Дом"/>
-            <input class="input !bg-white !w-1/2" type="tel" placeholder="Квартира/офис"/>
-            <input class="input !bg-white !w-1/4" type="tel" placeholder="Этаж"/>
-          </div>
-          <textarea class="input !bg-white" rows="4" placeholder="Комментарий курьеру"></textarea>
-          <a href="" class="button" :onclick.prevent="e=>newAddress=false">Добавить адрес</a>
-        </div>
+      <label for="another-recipient" class="flex flex-row shadow-md p-3 items-center border-gray-50 border bg-white rounded-md gap-3">
+        <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => console.log(anotherRecipient = e.target.checked)">
+        <strong>Получит другой человек</strong>
+      </label>
+    </div>
+
+    <div :if="newAddress || anotherRecipient" class="bg-gray-50 rounded-lg p-3 mb-4 text-base flex flex-col gap-3 mt-3">
+      <div :if="anotherRecipient" class="flex flex-col gap-3">
+        <input class="input !bg-white" type="text" placeholder="Имя"/>
+        <input class="input !bg-white" type="text" placeholder="Фамилия"/>
+        <input class="input !bg-white" type="tel" placeholder="Телефон"/>
       </div>
+      <div :if="newAddress" class="flex flex-col gap-3">
+        <input class="input !bg-white" type="text" placeholder="Укажите адрес"/>
+        <div class="flex flex-row gap-2">
+          <input class="input !bg-white !w-1/4" type="text" placeholder="Дом"/>
+          <input class="input !bg-white !w-1/2" type="tel" placeholder="Квартира/офис"/>
+          <input class="input !bg-white !w-1/4" type="tel" placeholder="Этаж"/>
+        </div>
+        <textarea class="input !bg-white" rows="4" placeholder="Комментарий курьеру"></textarea>
+      </div>
+      <a :if="anotherRecipient" href="" class="button">Сохранить данные</a>
+      <a :else href="" class="button" :onclick.prevent="e=>newAddress=false">Добавить адрес</a>
     </div>
   </section>
 
-  <section id="recipient" :with="{another:false}">
-    <label for="another-recipient" class="flex flex-row shadow-md p-3 items-center border-gray-50 border bg-white rounded-md gap-3">
-      <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => (another = !another)">
-      <strong>Получит другой человек</strong>
-    </label>
-
+  <section id="recipient">
     <h2 class="font-semibold text-xl mt-6">Покупатель и получатель</h2>
 
     <div class="bg-gray-50 rounded-lg p-3 mb-4 text-base flex flex-col gap-3 mt-3">
-      <div :if="!another" class="bg-white rounded-md p-3">
+      <div class="bg-white rounded-md p-3">
         <dl class="text-sm">
           <dt class="float-left font-semibold">Имя</dt>
           <dd class="float-right">Artem</dd>
@@ -171,13 +176,6 @@ title: Корзина
           <dt class="float-left font-semibold">Телефон</dt>
           <dd class="float-right">+7 999 800 2112</dd>
         </dl>
-      </div>
-
-      <div :else class="flex flex-col gap-3">
-        <input class="input !bg-white" type="text" placeholder="Имя"/>
-        <input class="input !bg-white" type="text" placeholder="Фамилия"/>
-        <input class="input !bg-white" type="tel" placeholder="Телефон"/>
-        <a href="" class="button">Сохранить данные</a>
       </div>
     </div>
 
