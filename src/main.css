@@ -21,7 +21,7 @@ p a {
 }
 
 .input {
-  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400 h-10
+  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400 min-h-[2.5rem]
 }
 
 .popup {
@@ -29,7 +29,10 @@ p a {
 }
 
 .checkbox {
-  @apply w-7 h-7 px-1 relative appearance-none border-[1px] border-gray-200 rounded-md shadow-sm bg-white outline-none flex-shrink-0;
+  @apply w-7 h-7 px-1 relative appearance-none border-[1px] border-gray-200 bg-gray-50 rounded-md shadow-sm outline-none flex-shrink-0;
+}
+.checkbox:checked {
+  @apply bg-white;
 }
 .checkbox:checked:after {
   content: '';
