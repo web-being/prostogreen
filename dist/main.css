@@ -852,6 +852,10 @@ video {
   width: fit-content !important;
 }
 
+.\!w-full {
+  width: 100% !important;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -898,10 +902,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.\!w-full {
-  width: 100% !important;
 }
 
 .max-w-lg {
@@ -981,6 +981,10 @@ video {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(1px * var(--tw-divide-y-reverse));
+}
+
+.overflow-hidden {
+  overflow: hidden;
 }
 
 .truncate {
@@ -1426,6 +1430,10 @@ video {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+}
+
+[\:if], [\:else], [\:each] {
+  display: none;
 }
 
 p a {

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+[\:if], [\:else], [\:each] {
+  display: none;
+}
+
 p a {
   @apply text-green-500 hover:text-green-400;
 }

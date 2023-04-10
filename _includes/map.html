@@ -1,7 +1,8 @@
-<div id="map-container" class="bg-gray-200 rounded-md mt-6 mb-8 h-full">
+<div id="map-container" class="bg-gray-200 w-full rounded-md mt-6 mb-8 h-full overflow-hidden">
 </div>
 <button class="button button-green h-10 font-medium absolute bottom-16 !px-16 mx-auto left-0 right-0 !w-fit">Добавить адрес</button>
 
+<!--
 <script type="text/javascript">
   function initMap() {
     // Basic options for a simple Google Map
@@ -52,4 +53,16 @@
     }, 1000)
   }
 </script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDh1gTWO5V-HZl2T_9iXLCDPcuLt8aXNc&callback=initMap"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDh1gTWO5V-HZl2T_9iXLCDPcuLt8aXNc&callback=initMap"></script> -->
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=en_RU&amp;apikey=8619ac69-e328-4c7d-99b0-1f1fb2a8741b" type="text/javascript"></script>
+<script type="text/javascript" :init="map && window.initMap()">
+  ymaps.ready(() => {
+    window.initMap = function initMap(){
+      var myMap = new ymaps.Map('map-container', {
+          center: [55.76, 37.64],
+          zoom: 7
+      });
+    }
+  })
+</script>
