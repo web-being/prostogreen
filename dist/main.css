@@ -623,12 +623,32 @@ video {
   top: 1.5rem;
 }
 
+.top-4 {
+  top: 1rem;
+}
+
+.top-8 {
+  top: 2rem;
+}
+
+.top-7 {
+  top: 1.75rem;
+}
+
 .z-10 {
   z-index: 10;
 }
 
 .z-30 {
   z-index: 30;
+}
+
+.z-50 {
+  z-index: 50;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .float-right {
@@ -768,12 +788,12 @@ video {
   display: block;
 }
 
-.inline-block {
-  display: inline-block;
-}
-
 .\!inline-block {
   display: inline-block !important;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .flex {
@@ -794,6 +814,10 @@ video {
 
 .hidden {
   display: none;
+}
+
+.\!h-auto {
+  height: auto !important;
 }
 
 .h-10 {
@@ -846,19 +870,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
-.h-auto {
-  height: auto;
-}
-
-.\!h-auto {
-  height: auto !important;
 }
 
 .max-h-full {
@@ -1219,6 +1230,11 @@ video {
   padding-bottom: 1rem;
 }
 
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1237,6 +1253,10 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .text-left {
@@ -1631,6 +1651,7 @@ p a:hover {
   position: relative;
   height: 1.75rem;
   width: 1.75rem;
+  flex-shrink: 0;
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;

@@ -43,7 +43,7 @@ title: Корзина
     </article>
   </section>
 
-  <section id="delivery" :with="{pickup:false}">
+  <section id="delivery" :with="{pickup:false, select:false}">
     <h2 class="font-semibold text-xl mt-6">Способ получения</h2>
     <div class="grid grid-cols-2 gap-3 my-3">
       <a href="#login-email" class="button !text-base h-10 flex flex-row items-center justify-center" :class="pickup ? '' : '!text-black'" :onclick.prevent="e => pickup=true">Самовывоз</a>
@@ -62,14 +62,36 @@ title: Корзина
     </div>
 
     <div :else>
-      <div class="bg-gray-50 rounded-lg p-3 mb-3 text-base flex flex-col gap-3 mt-6">
-        <button class="bg-white rounded-md overflow-hidden p-3 shadow-md relative text-left">
-          <h2 class="font-semibold">Доставка курьером</h2>
-          <p class="text-xs mt-2">Сегодня, завтра и позже</p>
-          <svg class="absolute top-0 bottom-0 right-4 my-auto" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.33398 1L5.74473 5.41074C6.07017 5.73618 6.07017 6.26382 5.74473 6.58926L1.33398 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
+      <div class="bg-gray-50 rounded-lg p-3 mb-3 text-base gap-3 mt-6">
+        <div class="relative w-full flex flex-col">
+          <button class="bg-white rounded-md overflow-hidden p-3 shadow-md relative text-left" :onclick="e=>(select=true)">
+            <svg class="absolute top-7 right-4" width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.33398 1L5.74473 5.41074C6.07017 5.73618 6.07017 6.26382 5.74473 6.58926L1.33398 11" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <h2 class="font-semibold">Доставка курьером</h2>
+            <p class="text-xs mt-2">Сегодня, завтра и позже</p>
+          </button>
+          <fieldset :if="select" class="absolute p-3 top-0 left-0 right-0 border-gray-50 border bg-white rounded-md shadow-lg z-10">
+            <svg class="absolute top-7 right-4" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 1.33334L6.58926 5.74409C6.26382 6.06952 5.73618 6.06952 5.41074 5.74409L1 1.33334" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <label for="express-delivery" class="flex flex-row items-center gap-3">
+              <input name="delivery" id="express-delivery" type="radio" class="checkbox" :onclick="e => (select=false)" checked>
+              <p class="text-xs">
+                <strong class="font-semibold text-sm">Экспресс-доставка курьером</strong><br/>
+                Привезём в течении 2 часов – 699 ₽
+              </p>
+            </label>
+            <hr class="pt-3 mt-3"/>
+            <label for="courier-delivery" class="flex flex-row items-center gap-3">
+              <input name="delivery" id="courier-delivery" type="radio" class="checkbox" :onclick="e => (select=false)">
+              <p class="text-xs">
+                <strong class="font-semibold text-sm">Доставка курьером</strong><br/>
+                Завтра и позже – 399 ₽
+              </p>
+            </label>
+          </div>
+        </div>
       </div>
       <h2 class="font-semibold text-lg">Адрес доставки</h2>
       <div class="bg-gray-50 rounded-lg p-3 mb-6 text-base flex flex-col gap-3 mt-3">
@@ -89,14 +111,14 @@ title: Корзина
 
   <section id="recipient" :with="{another:false}">
     <label for="another-recipient" class="flex flex-row shadow-md p-3 items-center border-gray-50 border bg-white rounded-md gap-3">
-      <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => (console.log(1234), another = !another)">
+      <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => (another = !another)">
       <strong>Получит другой человек</strong>
     </label>
 
     <h2 class="font-semibold text-xl mt-6">Покупатель и получатель</h2>
 
     <div class="bg-gray-50 rounded-lg p-3 mb-4 text-base flex flex-col gap-3 mt-3">
-      <div :if="console.log(another), !another" class="bg-white rounded-md p-3">
+      <div :if="!another" class="bg-white rounded-md p-3">
         <dl class="text-sm">
           <dt class="float-left font-semibold">Имя</dt>
           <dd class="float-right">Artem</dd>

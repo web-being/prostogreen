@@ -29,7 +29,7 @@ p a {
 }
 
 .checkbox {
-  @apply w-7 h-7 px-1 relative appearance-none border-[1px] border-gray-200 rounded-md shadow-sm bg-white outline-none;
+  @apply w-7 h-7 px-1 relative appearance-none border-[1px] border-gray-200 rounded-md shadow-sm bg-white outline-none flex-shrink-0;
 }
 .checkbox:checked:after {
   content: '';
