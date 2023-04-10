@@ -11,7 +11,7 @@ p a {
 }
 
 .button {
-  @apply items-center w-auto focus:ring-4 focus:outline-none rounded-lg py-1 leading-snug tracking-wide text-sm text-center px-3 whitespace-nowrap bg-white shadow-md text-green-500 border-gray-50 border hover:text-green-300;
+  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-1 leading-snug tracking-wide text-sm text-center px-3 whitespace-nowrap bg-white shadow-md text-green-500 border-gray-50 border hover:text-green-300 h-10 flex flex-row items-center justify-center;
 }
 .button-green {
   @apply text-white hover:text-white bg-gradient-to-b from-green-300 to-green-500 hover:from-green-200 hover:to-green-400 focus:ring-green-300 border-none ;
@@ -21,7 +21,7 @@ p a {
 }
 
 .input {
-  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400
+  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400 h-10
 }
 
 .popup {
