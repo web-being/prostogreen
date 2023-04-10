@@ -134,7 +134,7 @@ title: Корзина
       </div>
 
       <label for="another-recipient" class="flex flex-row shadow-md p-3 items-center border-gray-50 border bg-white rounded-md gap-3">
-        <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => console.log(anotherRecipient = e.target.checked)">
+        <input id="another-recipient" type="checkbox" class="checkbox" :onchange="e => (anotherRecipient = e.target.checked)">
         <strong>Получит другой человек</strong>
       </label>
     </div>
