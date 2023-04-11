@@ -4,7 +4,7 @@ title: Корзина
 
 {% include head.html %}
 
-<main class="max-w-md mx-auto relative px-4 pt-4">
+<main class="max-w-md mx-auto relative px-4 pt-4" :with="{pickup:false, newAddress:false, anotherRecipient:false}">
   <a href="." class="mt-3 text-gray-500">
     <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -43,7 +43,7 @@ title: Корзина
     </article>
   </section>
 
-  <section id="delivery" :with="{pickup:false, newAddress:false, anotherRecipient:false}">
+  <section id="delivery">
     <h2 class="font-semibold text-xl mt-6">Способ получения</h2>
     <div class="grid grid-cols-2 gap-3 my-3">
       <a href="#login-email" class="button !text-base h-10 flex flex-row items-center justify-center" :class="pickup ? '' : '!text-black'" :onclick.prevent="e => pickup=true">Самовывоз</a>
@@ -225,7 +225,7 @@ title: Корзина
     В соответсвии с ФЗ 54-ФЗ кассовый чек при онлайн-оплате будет предоставлен в электронном виде на указанный при оформлении заказа номер телефона
   </p>
 
-  <button class="button button-green h-10 font-medium !px-16 mx-auto my-4 !w-full">Оплатить</button>
+  <a :href="`order-confirmed.html${pickup?'?pickup':''}`" class="button button-green button-lg h-10 font-medium !px-16 mx-auto my-4 !w-full">Оплатить</a>
 </main>
 
 {% include foot.html %}

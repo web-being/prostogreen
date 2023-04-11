@@ -37,16 +37,18 @@ title: Главная
   {img: 'promo-1.png'}
 ]}"></section>
 
-<section id="featured" :render="featuredTpl" :with="{title: 'Успей купить', items: [
+<header class="flex flex-row items-baseline mx-4">
+  <h2 class="text-xl font-semibold">Успей купить</h2>
+  <a class="ml-auto text-green-600 hover:text-green-500 active:text-green-400 text-sm" href="/#see-all">Смотреть все</a>
+</header>
+<section id="featured" :render="featuredTpl" :with="{items: [
   {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
   {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
   {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},
   {id:4,name:'',desc:'',price:'',oldPrice:'',img:'',rating:3},
 ]}"></section>
 
-<section id="apples" class="mx-3" :render="articlesTpl" :with="{
-  title: 'Яблони',
-  headerBg: 'banner-apples.png',
+<section id="apples" class="mx-3" :with="{
   items: [
   {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
   При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
@@ -72,11 +74,14 @@ title: Главная
   {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
   При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
   Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
-]}"></section>
+]}">
+  <div class="h-20 px-4 my-4 rounded-lg shadow-md w-full bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/banner-apples.png)`">
+    <h2 class="text-3xl font-medium text-white">Яблони</h2>
+  </div>
+  <div :render="articlesTpl"></div>
+</section>
 
-<section id="roses" class="mx-3" :render="articlesTpl" :with="{
-  title: 'Розы',
-  headerBg: 'banner-roses.png',
+<section id="roses" class="mx-3" :with="{
   items: [
   {id:11,name:'Роза “Кофе брейк”',desc:`Роза Кофе брейк относится к сортам среднего срока созревания.
   При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
@@ -102,14 +107,23 @@ title: Главная
   {id:18,name:'Роза “Мария”',desc:`Роза Ренет относится к сортам среднего срока созревания.
   При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
   Сорт яблони Мельба был выведен в Швеции.`,img:'roses-8.png',price:380,rating:4}
-]}"></section>
+]}">
+  <div class="h-20 px-4 my-4 rounded-lg shadow-md w-full bg-right bg-cover bg-no-repeat flex items-center" :style="`background-image:url(./assets/banner-roses.png)`">
+    <h2 class="text-3xl font-medium text-white">Розы</h2>
+  </div>
+  <div :render="articlesTpl"></div>
+</section>
 
 <section id="banner-2" class="my-4" :render="bannerTpl" :with="{items: [
   {img: 'promo-2.png'},
   {img: 'promo-1.png'}
 ]}"></section>
 
-<section id="for-you" :render="featuredTpl" :with="{title: 'Для вас', items: [
+<header class="flex flex-row items-baseline mx-4">
+  <h2 class="text-xl font-semibold">Для вас</h2>
+  <a class="ml-auto text-green-600 hover:text-green-500 active:text-green-400 text-sm" href="/#see-all">Смотреть все</a>
+</header>
+<section id="for-you" :render="featuredTpl" :with="{items: [
   {id:1,name:`Голубика Дюк`,desc:'Это не только название сорта голубики, но и еще одного сорта: Голубика дюка, который тоже очень вкусный.',img:'featured-1.png',price:438,oldPrice:489,rating:4},
   {id:2,name:'Яблоня Макинтош',desc:'Яблоки, которые никогда не будут проданы на рынке, потому что их невозможно продать.',img:'featured-3.png',price:465,oldPrice:469,rating:3},
   {id:3,name:'Гортензия Никко Блю',desc:'Растение семейства Гортензиевых, которое цветет всего один раз в жизни, но зато цветёт очень долго.',img:'featured-2.png',price:123,oldPrice:456,rating:5},

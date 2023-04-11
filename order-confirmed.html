@@ -1,0 +1,77 @@
+---
+title: Корзина
+---
+
+{% include head.html %}
+{% include templates.html %}
+
+<main class="max-w-md mx-auto relative px-4" :with="{pickup:location.search.includes('pickup')}">
+  <section id="confirmed" class="bg-gray-50 rounded-lg p-3 mb-4 text-base flex flex-col gap-3 mt-3">
+    <div class="bg-white rounded-md p-3">
+      <div class="items-center flex flex-col">
+        <h1 class="font-semibold text-xl mt-16 mb-8 leading-relaxed">
+          Заказ оформлен<br/>
+          № <strong class="text-green-500">3943-2689-2357</strong>
+        </h1>
+        <svg width="88" height="63" viewBox="0 0 88 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M82 6.24988L33.1088 55.1411C31.2538 56.9961 28.2462 56.9961 26.3912 55.1411L6 34.7499" stroke="url(#paint0_linear_1045_13572)" stroke-width="11.4" stroke-linecap="round"/>
+          <defs>
+          <linearGradient id="paint0_linear_1045_13572" x1="82" y1="56.5324" x2="-4.02106" y2="-53.7201" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#25B444"/>
+          <stop offset="1" stop-color="white"/>
+          </linearGradient>
+          </defs>
+        </svg>
+        <button class="button button-lg mx-auto !text-base !px-10 mt-8">Заказать еще</button>
+      </div>
+      <h2 class="font-semibold text-base my-3 mt-6">Получатель</h2>
+      <p class="text-sm leading-relaxed">
+        Артем Шевченко<br/>
+        ***************@gmail.com<br/>
+        +7 999 800 2112
+      </p>
+      <hr class="mt-3"/>
+      <h2 :if="pickup" class="font-semibold text-base my-3">Самовывоз</h2>
+      <h2 :else class="font-semibold text-base my-3">Доставка курьером</h2>
+      <p class="text-sm">
+        Всеволожский район, Заневское городское поселение, массив Кудрово, 69, Санкт-Петербург, Ленинградская обл.
+      </p>
+    </div>
+    <button :if="pickup" class="button button-lg">Проложить маршрут</button>
+  </section>
+
+
+  <h2 class="font-semibold text-xl my-4">Вам может понравиться</h2>
+
+  <section id="you-may-like" :render="articlesTpl" :with="{
+    title: 'Вам может понравиться',
+    headerBg: null,
+    items: [
+    {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-1.png',price:450,rating:4},
+    {id:2,name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-2.png',price:450,rating:4.3},
+    {id:3,name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-3.png',price:450,rating:4},
+    {id:4,name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-4.png',price:450,rating:4.1},
+    {id:5,name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-5.png',price:389,rating:5},
+    {id:6,name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-6.png',price:380,rating:4},
+    {id:7,name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-7.png',price:389,rating:5},
+    {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+    При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+    Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
+  ]}"></section>
+</main>
+
+{% include foot.html %}
