@@ -47,3 +47,19 @@ p a {
   background-size: contain;
   background-position: center;
 }
+.panel {
+  @apply border-gray-50 border-8 rounded-xl p-2;
+}
+
+/* position dots in carousel */
+.flickity-page-dots {
+  @apply bottom-4;
+}
+/* white circles */
+.flickity-page-dots .dot {
+  @apply w-2 h-2 opacity-30 bg-black rounded-full mx-1 shadow-md shadow-gray-400;
+}
+/* fill-in selected dot */
+.flickity-page-dots .dot.is-selected {
+  @apply bg-white w-6 shadow-none;
+}
