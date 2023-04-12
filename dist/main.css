@@ -780,6 +780,10 @@ video {
   margin-top: auto;
 }
 
+.-ml-2 {
+  margin-left: -0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -874,6 +878,10 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-60 {
+  height: 15rem;
 }
 
 .min-h-\[130px\] {
@@ -1080,6 +1088,10 @@ video {
 
 .border-\[1px\] {
   border-width: 1px;
+}
+
+.border-8 {
+  border-width: 8px;
 }
 
 .border-b {
@@ -1757,14 +1769,6 @@ p a:hover {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-}
-
-.panel {
-  border-radius: 0.75rem;
-  border-width: 8px;
-  --tw-border-opacity: 1;
-  border-color: rgb(249 250 251 / var(--tw-border-opacity));
-  padding: 0.5rem;
 }
 
 /* position dots in carousel */

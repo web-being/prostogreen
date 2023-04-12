@@ -47,9 +47,6 @@ p a {
   background-size: contain;
   background-position: center;
 }
-.panel {
-  @apply border-gray-50 border-8 rounded-xl p-2;
-}
 
 /* position dots in carousel */
 .flickity-page-dots {
