@@ -48,6 +48,16 @@ p a {
   background-position: center;
 }
 
+.defs {
+  @apply leading-relaxed;
+}
+.defs dt {
+  @apply font-semibold inline;
+}
+.defs dd {
+  @apply inline leading-snug after:content-end after:block;
+}
+
 /* position dots in carousel */
 .flickity-page-dots {
   @apply bottom-4;
