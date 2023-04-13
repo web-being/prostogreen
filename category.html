@@ -1,0 +1,86 @@
+---
+title: Категория
+---
+
+{% include head.html %}
+{% include templates.html %}
+
+
+<main class="max-w-md mx-auto px-2" :with="{
+  popup:false,
+  sorting:'popular',
+  sortings: {
+    popular:'Популярные',
+    rating:'Высокий рейтинг',
+    new:'Новинки',
+    cheap:'Сначала дешевле',
+    expensive:'Сначала дороже'
+  }
+}">
+
+<header class="flex flex-row items-center mt-8 mb-6">
+  <h1 class="text-xl font-semibold">Плодовые и ягодные</h1>
+  <button class="ml-auto">
+    <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.6873 13.334L7.65397 13.334M7.65397 13.334C7.65397 11.5391 6.19516 10.084 4.39563 10.084C2.5961 10.084 1.1373 11.5391 1.1373 13.334C1.1373 15.1289 2.5961 16.584 4.39563 16.584C6.19516 16.584 7.65397 15.1289 7.65397 13.334ZM15.2568 4.66732L3.30952 4.66732M15.2568 4.66732C15.2568 2.87239 16.7156 1.41732 18.5151 1.41732C20.3146 1.41732 21.7734 2.87239 21.7734 4.66732C21.7734 6.46224 20.3146 7.91732 18.5151 7.91732C16.7156 7.91732 15.2568 6.46224 15.2568 4.66732Z" stroke="#414141" stroke-width="2.16667" stroke-linecap="round"/>
+    </svg>
+  </button>
+</header>
+
+<nav class="flex flex-row flex-wrap gap-2">
+  <button class="text-sm w-full py-1 text-left" :onclick="e=>popup='sorting'">
+    <span :text="sortings[sorting]"></span>
+    <svg class="inline" width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 5L0.669873 0.5L9.33013 0.500001L5 5Z" fill="#222222"/>
+    </svg>
+  </button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Цена</button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Доставка</button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Продавец</button>
+</nav>
+
+<section id="for-you" class="my-6" :with="{
+  items: [
+  {id:1,name:'Яблоня “Мельба”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-1.png',price:450,rating:4},
+  {id:2,name:'Яблоня “Икша”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-2.png',price:450,rating:4.3},
+  {id:3,name:'Яблоня “Жигулевская”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-3.png',price:450,rating:4},
+  {id:4,name:'Яблоня “Красная”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-4.png',price:450,rating:4.1},
+  {id:5,name:'Яблоня “Ред Чиф”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-5.png',price:389,rating:5},
+  {id:6,name:'Яблоня “Богатырь”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-6.png',price:380,rating:4},
+  {id:7,name:'Яблоня “Грушовка”',desc:`Яблоня Мельба относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-7.png',price:389,rating:5},
+  {id:8,name:'Яблоня “Ренет”',desc:`Яблоня Ренет относится к сортам среднего срока созревания.
+  При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
+  Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
+]}">
+  <div :render="articlesTpl"></div>
+</section>
+
+<section id="sorting" :if="popup=='sorting'" class="popup flex flex-col items-center mt-16">
+  <a href="#close" :onclick.prevent="e => popup=false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <div class="divide-y w-full flex flex-col mx-2 mt-12">
+    <button :each="name,key in sortings" class="py-3 relative flex flex-row gap-3 items-center text-sm hover:text-gray-400" :class="key === sorting && 'text-green-500'" :onclick="e=>(sorting=key,popup=false)">
+      <span :text="name"></span>
+    </button>
+  </div>
+</section>
+
+</main>
+{% include foot.html %}

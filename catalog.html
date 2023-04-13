@@ -70,11 +70,11 @@ title: Каталог
     ]
   }">
   <li class="flex flex-row flex-wrap w-full items-center text-sm py-1.5" :each="item in items" :with="{collapsed:true}">
-    <a :href="item.name" :text="item.name" class="hover:text-gray-400"></a>
+    <a :href="`./category`" :text="item.name" class="hover:text-gray-400"></a>
     <button class="text-lg ml-auto rounded-full border border-current text-gray-400 w-4 h-4" :class="!collapsed && 'text-green-500 border-2'" :onclick="e=>collapsed=!collapsed"></button>
     <ul :if="!collapsed && item.items" class="ml-3 my-2 list-none divide-y flex flex-col w-full border-t border-gray-200">
       <li class="w-full items-center text-sm py-1.5" :each="item in item.items">
-        <a :href="item.name" :text="item.name" class="hover:text-gray-400"></a>
+        <a :href="`./category`" :text="item.name" class="hover:text-gray-400"></a>
       </li>
     </ul>
   </li>
