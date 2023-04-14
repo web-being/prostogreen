@@ -5,6 +5,7 @@ title: Категория
 {% include head.html %}
 {% include templates.html %}
 
+<script src="https://cdn.jsdelivr.net/npm/nouislider/dist/nouislider.min.js"></script>
 
 <main class="max-w-md mx-auto px-2" :with="{
   popup:false,
@@ -15,7 +16,9 @@ title: Категория
     new:'Новинки',
     cheap:'Сначала дешевле',
     expensive:'Сначала дороже'
-  }
+  },
+  price:[0,100],
+  delivery:'today'
 }">
 
 <header class="flex flex-row items-center mt-8 mb-6">
@@ -34,9 +37,9 @@ title: Категория
     <path d="M5 5L0.669873 0.5L9.33013 0.500001L5 5Z" fill="#222222"/>
     </svg>
   </button>
-  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Цена</button>
-  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Доставка</button>
-  <button class="text-sm bg-gray-100 rounded-md px-2 py-1">Продавец</button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup='price'">Цена</button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup='delivery'">Доставка</button>
+  <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup='merchant'">Продавец</button>
 </nav>
 
 <section id="for-you" class="my-6" :with="{
@@ -69,7 +72,7 @@ title: Категория
   <div :render="articlesTpl"></div>
 </section>
 
-<section id="sorting" :if="popup=='sorting'" class="popup flex flex-col items-center mt-16">
+<section id="sorting" :if="popup=='sorting'" class="popup mt-14">
   <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
@@ -82,5 +85,54 @@ title: Категория
   </div>
 </section>
 
+<section id="price" :if="popup=='price'" class="popup mt-14" :with="{min:0,max:1000}">
+  <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <h3 class="font-semibold text-lg mt-12">Цена</h3>
+
+  <div id="price-slider" :ref="slider" class="slider mt-8" :init="window.noUiSlider.create(this, {
+      start: [0, 1000],
+      connect: true,
+      range: {min:0, max:10000}
+  });" :update="this.noUiSlider.on('update',values=>([min,max]=values))"></div>
+
+  <div class="w-full mt-8 grid grid-cols-2 gap-8">
+    <input id="price-min" :value="min" class="input" step="100" type="number" min="0" max="10000" @input="slider.noUiSlider.set([this.value, null])" />
+    <input id="price-max" :value="max" class="input" step="100" type="number" min="0" max="10000" @input="slider.noUiSlider.set([null,this.value])"/>
+  </div>
+</section>
+
+
+<section id="delivery" :if="popup=='delivery'" class="popup mt-14" :with="{min:0,max:1000}">
+  <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <h3 class="font-semibold text-lg mt-12">Доставка</h3>
+
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="delivery='today',popup=false">Сегодня</button>
+    <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="delivery='tomorrow',popup=false">Завтра</button>
+    <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="delivery='2days',popup=false">До 2 дней</button>
+    <button class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="delivery='5days',popup=false">До 5 дней</button>
+  </nav>
+</section>
+
+<section id="merchant" :if="popup=='merchant'" class="popup mt-14" :with="{min:0,max:1000}">
+  <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <h3 class="font-semibold text-lg mt-12">Бренд</h3>
+
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button :each="brand in 15" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="merchant=brand,popup=false">Name</button>
+  </nav>
+</section>
 </main>
 {% include foot.html %}

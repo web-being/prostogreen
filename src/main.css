@@ -70,3 +70,18 @@ p a {
 .flickity-page-dots .dot.is-selected {
   @apply bg-white w-6 shadow-none;
 }
+
+.slider {
+  @apply py-0 px-2
+}
+.slider {
+  @apply h-3
+}
+
+.slider .noUi-connect {
+  @apply bg-green-500
+}
+
+.slider .noUi-handle {
+  @apply h-6 w-6 rounded-full -right-3 -top-2 after:content-none before:content-none
+}
