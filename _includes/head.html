@@ -30,19 +30,19 @@
     <input class="bg-transparent w-full outline-none text-sm" placeholder="Поиск растений"/>
     <a href="#" class="flex-shrink-0 hover:opacity-60"><img class="block h-5" src="{{ './assets/icon-camera.svg' | relative_url }}"/></a>
   </div>
-  <a id="menu" href="#menu" :onclick.prevent="e=>menu=true" class="block ml-auto mr-2 hover:opacity-50">
+  <a id="menu" href="#menu" @click.prevent="menu=true" class="block ml-auto mr-2 hover:opacity-50">
     <img class="block" src="{{ './assets/icon-menu.svg' | relative_url }}"/>
   </a>
 </header>
 
 <section id="menu" :if="menu" class="popup">
-  <a href="#close" :onclick.prevent="e => menu = false" class="absolute top-6 right-6 text-gray-500">
+  <a href="#close" @click.prevent=" menu = false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
   </a>
   <header class="flex flex-row my-3 items-center">
-    <button class="button button-green font-medium" :onclick.prevent="e=>(login='login',menu=false)">Войти / Зарегистрироваться</button>
+    <button class="button button-green font-medium" @click.prevent="(login='login',menu=false)">Войти / Зарегистрироваться</button>
   </header>
   <ul class="divide-y">
     <li class="flex items-center" :each="item in [
@@ -64,7 +64,7 @@
 </section>
 
 <section id="login" :if="login" class="popup flex flex-col items-center">
-  <a href="#close" :onclick.prevent="e => login=false" class="absolute top-6 right-6 text-gray-500">
+  <a href="#close" @click.prevent=" login=false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
@@ -80,8 +80,8 @@
     </a>
     <h2 class="my-12 font-semibold text-center text-lg">Вход в аккаунт</h2>
     <nav class="flex flex-col gap-3 w-72">
-      <a href="#login-email" :onclick.prevent="e=>login='email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
-      <a href="#login-phone" :onclick.prevent="e=>login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
+      <a href="#login-email" @click.prevent="login='email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
+      <a href="#login-phone" @click.prevent="login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
       <div class="grid grid-cols-4 gap-3 mt-2">
         <a href="" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z" fill="currentColor"/></svg>
@@ -96,7 +96,7 @@
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google</title><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="currentColor"/></svg>
         </a>
       </div>
-      <a href="#signup" :onclick.prevent="e=>login='signup'" class="mt-8 mx-auto text-sm text-green-500 hover:text-green-300">Регистрация</a>
+      <a href="#signup" @click.prevent="login='signup'" class="mt-8 mx-auto text-sm text-green-500 hover:text-green-300">Регистрация</a>
     </nav>
     <p class="text-sm text-center w-full mt-auto mb-8"><a href="terms" class="text-gray-400 hover:text-gray-300">Условия использования</a></p>
   </div>
@@ -111,8 +111,8 @@
     </a>
     <h2 class="my-12 font-semibold text-center text-lg">Регистрация</h2>
     <nav class="flex flex-col gap-3 w-72">
-      <a href="#signup-email" :onclick.prevent="e=>login='signup-email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
-      <a href="#signup-phone" :onclick.prevent="e=>login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
+      <a href="#signup-email" @click.prevent="login='signup-email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
+      <a href="#signup-phone" @click.prevent="login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
       <div class="grid grid-cols-4 gap-3 mt-2">
         <a href="" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z" fill="currentColor"/></svg>
@@ -127,13 +127,13 @@
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google</title><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="currentColor"/></svg>
         </a>
       </div>
-      <p class="mt-8 text-sm text-center w-full text-gray-400">Есть аккаунт? <a href="#login" :onclick.prevent="e=>(login='login')" class="text-green-500 hover:text-green-300">Войти</a></p>
+      <p class="mt-8 text-sm text-center w-full text-gray-400">Есть аккаунт? <a href="#login" @click.prevent="(login='login')" class="text-green-500 hover:text-green-300">Войти</a></p>
     </nav>
     <p class="text-sm text-center w-full mt-auto mb-8"><a href="terms" class="text-gray-400 hover:text-gray-300">Условия использования</a></p>
   </div>
 
   <div :if="login=='email'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -143,11 +143,11 @@
       <input class="input" type="email" placeholder="Почта"/>
       <input class="input" type="password" placeholder="Пароль"/>
       <a href="" class="button mt-2 flex flex-row items-center justify-center">Войти</a>
-      <a href="" :onclick.prevent="e=>(login='forgot-pass')" class="button flex flex-row items-center justify-center !shadow-none !border-none">Забыли пароль?</a>
+      <a href="" @click.prevent="(login='forgot-pass')" class="button flex flex-row items-center justify-center !shadow-none !border-none">Забыли пароль?</a>
     </form>
   </div>
   <div :if="login=='forgot-pass'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='email'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='email'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -155,11 +155,11 @@
     <h2 class="mt-24 mb-8 text-lg font-semibold">Восстановить пароль</h2>
     <form class="flex flex-col gap-3 w-72">
       <input class="input" type="email" placeholder="Почта"/>
-      <a href="" :onclick.prevent="e=>login='email-sent'" class="button mt-2 flex flex-row items-center justify-center">Отправить</a>
+      <a href="" @click.prevent="login='email-sent'" class="button mt-2 flex flex-row items-center justify-center">Отправить</a>
     </form>
   </div>
   <div :if="login=='email-sent'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='forgot-pass'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='forgot-pass'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -172,7 +172,7 @@
   </div>
 
   <div :if="login=='phone'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -181,11 +181,11 @@
       <h2 class="mt-24 mb-8 text-lg font-semibold">Введите номер телефона</h2>
       <p class="text-sm text-center w-full mb-8 text-gray-400">Мы отправим вам код в СМС</p>
       <input class="input" type="tel" placeholder="+7"/>
-      <a href="" :onclick.prevent="e=>login='enter-code'" class="button mt-8 flex flex-row items-center justify-center">Получить код</a>
+      <a href="" @click.prevent="login='enter-code'" class="button mt-8 flex flex-row items-center justify-center">Получить код</a>
     </form>
   </div>
   <div :if="login=='enter-code'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='login'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -195,13 +195,13 @@
       <p class="text-sm text-center w-full mb-4 text-gray-400">Мы отправили код подтверждения на <span class="whitespace-nowrap">+7 999 683 52 92</span></p>
       <input class="input" type="tel" placeholder=""/>
       <p class="text-sm text-center w-full mt-4 mb-8 text-gray-400">Получить новый код можно через 1:00</p>
-      <a href="#login" :onclick.prevent="" class="text-sm text-green-500 hover:text-green-300 mx-auto">Не приходит СМС?</a>
+      <a href="#login" @click.prevent=""ss="text-sm text-green-500 hover:text-green-300 mx-auto">Не приходит СМС?</a>
     </form>
   </div>
 
 
   <div :if="login=='signup-email'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='signup'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='signup'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -211,11 +211,11 @@
       <input class="input" type="text" placeholder="Имя"/>
       <input class="input" type="email" placeholder="Почта"/>
       <input class="input" type="password" placeholder="Пароль"/>
-      <a href="" :onclick.prevent="e=>login='signup-email-sent'" class="button mt-2 flex flex-row items-center justify-center">Зарегистрироваться</a>
+      <a href="" @click.prevent="login='signup-email-sent'" class="button mt-2 flex flex-row items-center justify-center">Зарегистрироваться</a>
     </form>
   </div>
   <div :if="login=='signup-email-sent'" class="h-full flex flex-col items-center">
-    <a href="#back" :onclick.prevent="e=>login='signup-email'" class="absolute top-6 left-6 text-gray-500">
+    <a href="#back" @click.prevent="login='signup-email'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -233,7 +233,7 @@
     <div id="address" class="relative bg-gray-100 rounded-md w-full h-9 flex items-center px-4 gap-2">
       <input class="bg-transparent w-full outline-none text-sm" placeholder="Укажите адрес"/>
     </div>
-    <a href="#close" :onclick.prevent="e => map=false" class="flex-shrink-0 text-gray-600 text-xs">
+    <a href="#close" @click.prevent=" map=false" class="flex-shrink-0 text-gray-600 text-xs">
       Отменить
     </a>
   </header>

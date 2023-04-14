@@ -8,7 +8,7 @@
 2. SPA
   - too much code, turns messy
   - requires inclusion mechanism for separate pages
-  - raw links are unwieldy (`:onclick=e=>history.pushState(null,null,path)`), we need special directive, eg `:to="path"`
+  - raw links are unwieldy (`@click=history.pushState(null,null,path)`), we need special directive, eg `:to="path"`
 
 ### Logic
 

@@ -28,7 +28,7 @@ title: Категория
 </header>
 
 <nav class="flex flex-row flex-wrap gap-2">
-  <button class="text-sm w-full py-1 text-left" :onclick="e=>popup='sorting'">
+  <button class="text-sm w-full py-1 text-left" @click="popup='sorting'">
     <span :text="sortings[sorting]"></span>
     <svg class="inline" width="10" height="5" viewBox="0 0 10 5" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M5 5L0.669873 0.5L9.33013 0.500001L5 5Z" fill="#222222"/>
@@ -70,13 +70,13 @@ title: Категория
 </section>
 
 <section id="sorting" :if="popup=='sorting'" class="popup flex flex-col items-center mt-16">
-  <a href="#close" :onclick.prevent="e => popup=false" class="absolute top-6 right-6 text-gray-500">
+  <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
   </a>
   <div class="divide-y w-full flex flex-col mx-2 mt-12">
-    <button :each="name,key in sortings" class="py-3 relative flex flex-row gap-3 items-center text-sm hover:text-gray-400" :class="key === sorting && 'text-green-500'" :onclick="e=>(sorting=key,popup=false)">
+    <button :each="name,key in sortings" class="py-3 relative flex flex-row gap-3 items-center text-sm hover:text-gray-400" :class="key === sorting && 'text-green-500'" @click="(sorting=key,popup=false)">
       <span :text="name"></span>
     </button>
   </div>
