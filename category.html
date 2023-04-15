@@ -23,7 +23,7 @@ title: Категория
 
 <header class="flex flex-row items-center mt-8 mb-6">
   <h1 class="text-xl font-semibold">Плодовые и ягодные</h1>
-  <button class="ml-auto">
+  <button class="ml-auto" @click="popup='filters'">
     <svg width="23" height="18" viewBox="0 0 23 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M20.6873 13.334L7.65397 13.334M7.65397 13.334C7.65397 11.5391 6.19516 10.084 4.39563 10.084C2.5961 10.084 1.1373 11.5391 1.1373 13.334C1.1373 15.1289 2.5961 16.584 4.39563 16.584C6.19516 16.584 7.65397 15.1289 7.65397 13.334ZM15.2568 4.66732L3.30952 4.66732M15.2568 4.66732C15.2568 2.87239 16.7156 1.41732 18.5151 1.41732C20.3146 1.41732 21.7734 2.87239 21.7734 4.66732C21.7734 6.46224 20.3146 7.91732 18.5151 7.91732C16.7156 7.91732 15.2568 6.46224 15.2568 4.66732Z" stroke="#414141" stroke-width="2.16667" stroke-linecap="round"/>
     </svg>
@@ -132,6 +132,92 @@ title: Категория
 
   <nav class="flex flex-row flex-wrap gap-2 mt-4">
     <button :each="brand in 15" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="merchant=brand,popup=false">Name</button>
+  </nav>
+</section>
+
+
+<section id="filters" :if="popup=='filters'" class="popup mt-14" :with="{min:0,max:1000}">
+  <a href="#close" @click.prevent="popup=false" class="absolute top-6 right-6 text-gray-500">
+    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
+    </svg>
+  </a>
+  <h3 class="font-semibold text-xl mt-6 mb-12">Фильтры</h3>
+
+  <input class="input !w-full" placeholder="Поиск по категориям"/>
+
+  <h3 class="font-semibold text-lg mt-6">Цена</h3>
+
+  <div id="price-slider" :ref="slider" class="slider mt-8" :init="window.noUiSlider.create(this, {
+    start: [0, 1000],
+    connect: true,
+    range: {min:0, max:10000}
+  });" :update="this.noUiSlider.on('update',values=>([min,max]=values))"></div>
+  <div class="w-full mt-8 grid grid-cols-2 gap-8">
+    <input id="price-min" :value="min" class="input" step="100" type="number" min="0" max="10000" @input="slider.noUiSlider.set([this.value, null])" />
+    <input id="price-max" :value="max" class="input" step="100" type="number" min="0" max="10000" @input="slider.noUiSlider.set([null,this.value])"/>
+  </div>
+
+  <hr/>
+
+  <h3 class="font-semibold text-lg mt-3">Вкус</h3>
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button :each="item in [
+      'Сладкий',
+      'Кислый',
+      'Кисло-сладкий',
+      'Нежный',
+      'Сочный',
+      'Насыщенный',
+      'Освежающий',
+      'Фруктовый',
+      'Конфетный',
+      'Пряный',
+      'Десертный',
+      'Пикантный',
+      'Вяжущий',
+      'Терпкий',
+      'Ванильный',
+    ]" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup=false" :text="item"></button>
+  </nav>
+
+  <hr/>
+
+  <h3 class="font-semibold text-lg mt-3">Доставка</h3>
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button :each="item in [
+      'Бесплатно',
+      'Точно ко времени',
+      'Сегодня',
+      'Завтра',
+      'До 2 дней',
+      'До 5 дней',
+      'На следующий год',
+    ]" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup=false" :text="item"></button>
+  </nav>
+
+  <hr/>
+
+  <h3 class="font-semibold text-lg mt-3">Уход</h3>
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button :each="item in [
+      'Легко',
+      'Средне',
+      'Сложно',
+    ]" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup=false" :text="item"></button>
+  </nav>
+
+  <hr/>
+
+  <h3 class="font-semibold text-lg mt-3">Время цветения</h3>
+  <nav class="flex flex-row flex-wrap gap-2 mt-4">
+    <button :each="item in [
+      'Май',
+      'Июнь',
+      'Июль',
+      'Сентябрь',
+      'Октябрь',
+    ]" class="text-sm bg-gray-100 rounded-md px-2 py-1" @click="popup=false" :text="item"></button>
   </nav>
 </section>
 </main>
