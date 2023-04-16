@@ -28,7 +28,7 @@ p a {
 }
 
 .popup {
-  @apply max-w-md mx-auto px-4 fixed bg-white z-50 w-full h-full inset-0;
+  @apply max-w-md mx-auto px-4 fixed bg-white z-50 w-full inset-0 overflow-auto;
 }
 
 .checkbox {
