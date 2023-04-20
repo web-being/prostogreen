@@ -14,10 +14,12 @@
 </head>
 
 <body class="font-medium text-gray-800" :with="{
+  user: window.localStorage.user && window.JSON.parse(window.localStorage.user),
+  login(name='Артём Шевченко'){ window.localStorage.user = window.JSON.stringify(this.user = {name}) },
   likes: [],
   cart: [1,2,3],
   menu: false,
-  login: false,
+  loginPopup: false,
   address: '',
   map: false,
   like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
@@ -37,13 +39,17 @@
 </header>
 
 <section id="menu" :if="menu" class="popup">
-  <a href="#close" @click.prevent=" menu = false" class="absolute top-6 right-6 text-gray-500">
+  <a href="#close" @click.prevent="menu=false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
   </a>
   <header class="flex flex-row my-3 items-center">
-    <button class="button button-green font-medium" @click.prevent="(login='login',menu=false)">Войти / Зарегистрироваться</button>
+    <button :if="!user" class="button button-green font-medium" @click.prevent="(loginPopup='login',menu=false)">Войти / Зарегистрироваться</button>
+    <a :else href="profile" class="flex flex-row items-center gap-3 py-2">
+      <img :src="user.img" class="w-8 h-8 bg-gray-100 rounded-full" />
+      <strong :text="user.name" class="font-semibold"></strong>
+    </a>
   </header>
   <ul class="divide-y">
     <li class="flex items-center" :each="item in [
@@ -56,7 +62,7 @@
       {href:'extra',name:'Сопутствующие товары',icon:'basket'},
       {href:'help',name:'Справка',icon:'help'},
     ]">
-      <a :href="item.href" class="py-2 flex flex-row gap-4 items-center font-semibold hover:opacity-50">
+      <a :href="item.href" class="py-2 flex flex-row gap-4 items-center text-sm font-semibold hover:opacity-50">
         <img :src="`assets/icon-${item.icon}.svg`" width="16" height="16"/>
         <span :text="item.name"></span>
       </a>
@@ -64,14 +70,14 @@
   </ul>
 </section>
 
-<section id="login" :if="login" class="popup flex flex-col items-center">
-  <a href="#close" @click.prevent=" login=false" class="absolute top-6 right-6 text-gray-500">
+<section id="login" :if="loginPopup" class="popup flex flex-col items-center">
+  <a href="#close" @click.prevent=" loginPopup=false" class="absolute top-6 right-6 text-gray-500">
     <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00065 7.35006L15.1757 1.17502C15.6313 0.71941 16.37 0.71941 16.8256 1.17502C17.2812 1.63063 17.2812 2.36933 16.8256 2.82494L10.6506 8.99998L16.8256 15.175C17.2812 15.6306 17.2812 16.3693 16.8256 16.8249C16.37 17.2805 15.6313 17.2805 15.1757 16.8249L9.00065 10.6499L2.82561 16.8249C2.37 17.2805 1.6313 17.2805 1.17569 16.8249C0.720081 16.3693 0.720081 15.6306 1.17569 15.175L7.35074 8.99998L1.17569 2.82494C0.720081 2.36933 0.720081 1.63063 1.17569 1.17502C1.6313 0.71941 2.37 0.71941 2.82561 1.17502L9.00065 7.35006Z" fill="currentColor"/>
     </svg>
   </a>
 
-  <div :if="login=='login'" class="h-full flex flex-col">
+  <div :if="loginPopup=='login'" class="h-full flex flex-col">
     <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
       <img src="{{ './assets/logo.svg' | relative_url }}" class="h-20"/>
       <span class="flex flex-col text-lg leading-tight ml-4">
@@ -81,28 +87,28 @@
     </a>
     <h2 class="my-12 font-semibold text-center text-lg">Вход в аккаунт</h2>
     <nav class="flex flex-col gap-3 w-72">
-      <a href="#login-email" @click.prevent="login='email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
-      <a href="#login-phone" @click.prevent="login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
+      <a href="#login-email" @click.prevent="loginPopup='email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
+      <a href="#login-phone" @click.prevent="loginPopup='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
       <div class="grid grid-cols-4 gap-3 mt-2">
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-orange-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Odnoklassniki</title><path d="M12 0a6.2 6.2 0 0 0-6.194 6.195 6.2 6.2 0 0 0 6.195 6.192 6.2 6.2 0 0 0 6.193-6.192A6.2 6.2 0 0 0 12.001 0zm0 3.63a2.567 2.567 0 0 1 2.565 2.565 2.568 2.568 0 0 1-2.564 2.564 2.568 2.568 0 0 1-2.565-2.564 2.567 2.567 0 0 1 2.565-2.564zM6.807 12.6a1.814 1.814 0 0 0-.91 3.35 11.611 11.611 0 0 0 3.597 1.49l-3.462 3.463a1.815 1.815 0 0 0 2.567 2.566L12 20.066l3.405 3.403a1.813 1.813 0 0 0 2.564 0c.71-.709.71-1.858 0-2.566l-3.462-3.462a11.593 11.593 0 0 0 3.596-1.49 1.814 1.814 0 1 0-1.932-3.073 7.867 7.867 0 0 1-8.34 0c-.318-.2-.674-.29-1.024-.278z" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-gray-800" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Apple</title><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google</title><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="currentColor"/></svg>
         </a>
       </div>
-      <a href="#signup" @click.prevent="login='signup'" class="mt-8 mx-auto text-sm text-green-500 hover:text-green-300">Регистрация</a>
+      <a href="#signup" @click.prevent="loginPopup='signup'" class="mt-8 mx-auto text-sm text-green-500 hover:text-green-300">Регистрация</a>
     </nav>
     <p class="text-sm text-center w-full mt-auto mb-8"><a href="terms" class="text-gray-400 hover:text-gray-300">Условия использования</a></p>
   </div>
 
-  <div :if="login=='signup'" class="h-full flex flex-col">
+  <div :if="loginPopup=='signup'" class="h-full flex flex-col">
     <a id="logo" class="flex flex-row items-center justify-center mt-28" href="/">
       <img src="{{ './assets/logo.svg' | relative_url }}" class="h-20"/>
       <span class="flex flex-col text-lg leading-tight ml-4">
@@ -112,29 +118,29 @@
     </a>
     <h2 class="my-12 font-semibold text-center text-lg">Регистрация</h2>
     <nav class="flex flex-col gap-3 w-72">
-      <a href="#signup-email" @click.prevent="login='signup-email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
-      <a href="#signup-phone" @click.prevent="login='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
+      <a href="#signup-email" @click.prevent="loginPopup='signup-email'" class="button !text-base flex flex-row items-center justify-center">Почта</a>
+      <a href="#signup-phone" @click.prevent="loginPopup='phone'" class="button !text-base flex flex-row items-center justify-center">Телефон</a>
       <div class="grid grid-cols-4 gap-3 mt-2">
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-orange-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Odnoklassniki</title><path d="M12 0a6.2 6.2 0 0 0-6.194 6.195 6.2 6.2 0 0 0 6.195 6.192 6.2 6.2 0 0 0 6.193-6.192A6.2 6.2 0 0 0 12.001 0zm0 3.63a2.567 2.567 0 0 1 2.565 2.565 2.568 2.568 0 0 1-2.564 2.564 2.568 2.568 0 0 1-2.565-2.564 2.567 2.567 0 0 1 2.565-2.564zM6.807 12.6a1.814 1.814 0 0 0-.91 3.35 11.611 11.611 0 0 0 3.597 1.49l-3.462 3.463a1.815 1.815 0 0 0 2.567 2.566L12 20.066l3.405 3.403a1.813 1.813 0 0 0 2.564 0c.71-.709.71-1.858 0-2.566l-3.462-3.462a11.593 11.593 0 0 0 3.596-1.49 1.814 1.814 0 1 0-1.932-3.073 7.867 7.867 0 0 1-8.34 0c-.318-.2-.674-.29-1.024-.278z" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-gray-800" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Apple</title><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" fill="currentColor"/></svg>
         </a>
-        <a href="" class="button flex flex-row items-center justify-center">
+        <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
           <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Google</title><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" fill="currentColor"/></svg>
         </a>
       </div>
-      <p class="mt-8 text-sm text-center w-full text-gray-400">Есть аккаунт? <a href="#login" @click.prevent="(login='login')" class="text-green-500 hover:text-green-300">Войти</a></p>
+      <p class="mt-8 text-sm text-center w-full text-gray-400">Есть аккаунт? <a href="#login" @click.prevent="(loginPopup='login')" class="text-green-500 hover:text-green-300">Войти</a></p>
     </nav>
     <p class="text-sm text-center w-full mt-auto mb-8"><a href="terms" class="text-gray-400 hover:text-gray-300">Условия использования</a></p>
   </div>
 
-  <div :if="login=='email'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='email'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -143,12 +149,12 @@
     <form class="flex flex-col gap-3 w-72">
       <input class="input" type="email" placeholder="Почта"/>
       <input class="input" type="password" placeholder="Пароль"/>
-      <a href="" class="button mt-2 flex flex-row items-center justify-center">Войти</a>
-      <a href="" @click.prevent="(login='forgot-pass')" class="button flex flex-row items-center justify-center !shadow-none !border-none">Забыли пароль?</a>
+      <a href="" class="button mt-2 flex flex-row items-center justify-center" @click.prevent="loginPopup=false,login()">Войти</a>
+      <a href="" @click.prevent="(loginPopup='forgot-pass')" class="button flex flex-row items-center justify-center !shadow-none !border-none">Забыли пароль?</a>
     </form>
   </div>
-  <div :if="login=='forgot-pass'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='email'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='forgot-pass'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='email'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -156,11 +162,11 @@
     <h2 class="mt-24 mb-8 text-lg font-semibold">Восстановить пароль</h2>
     <form class="flex flex-col gap-3 w-72">
       <input class="input" type="email" placeholder="Почта"/>
-      <a href="" @click.prevent="login='email-sent'" class="button mt-2 flex flex-row items-center justify-center">Отправить</a>
+      <a href="" @click.prevent="loginPopup='email-sent'" class="button mt-2 flex flex-row items-center justify-center">Отправить</a>
     </form>
   </div>
-  <div :if="login=='email-sent'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='forgot-pass'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='email-sent'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='forgot-pass'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -172,8 +178,8 @@
     </form>
   </div>
 
-  <div :if="login=='phone'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='phone'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -182,11 +188,11 @@
       <h2 class="mt-24 mb-8 text-lg font-semibold">Введите номер телефона</h2>
       <p class="text-sm text-center w-full mb-8 text-gray-400">Мы отправим вам код в СМС</p>
       <input class="input" type="tel" placeholder="+7"/>
-      <a href="" @click.prevent="login='enter-code'" class="button mt-8 flex flex-row items-center justify-center">Получить код</a>
+      <a href="" @click.prevent="loginPopup='enter-code'" class="button mt-8 flex flex-row items-center justify-center">Получить код</a>
     </form>
   </div>
-  <div :if="login=='enter-code'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='login'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='enter-code'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='login'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -201,8 +207,8 @@
   </div>
 
 
-  <div :if="login=='signup-email'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='signup'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='signup-email'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='signup'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -212,11 +218,11 @@
       <input class="input" type="text" placeholder="Имя"/>
       <input class="input" type="email" placeholder="Почта"/>
       <input class="input" type="password" placeholder="Пароль"/>
-      <a href="" @click.prevent="login='signup-email-sent'" class="button mt-2 flex flex-row items-center justify-center">Зарегистрироваться</a>
+      <a href="" @click.prevent="loginPopup='signup-email-sent'" class="button mt-2 flex flex-row items-center justify-center">Зарегистрироваться</a>
     </form>
   </div>
-  <div :if="login=='signup-email-sent'" class="h-full flex flex-col items-center">
-    <a href="#back" @click.prevent="login='signup-email'" class="absolute top-6 left-6 text-gray-500">
+  <div :if="loginPopup=='signup-email-sent'" class="h-full flex flex-col items-center">
+    <a href="#back" @click.prevent="loginPopup='signup-email'" class="absolute top-6 left-6 text-gray-500">
       <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
