@@ -16,6 +16,7 @@
 <body class="font-medium text-gray-800" :with="{
   user: window.localStorage.user && window.JSON.parse(window.localStorage.user),
   login(name='Артём Шевченко'){ window.localStorage.user = window.JSON.stringify(this.user = {name}) },
+  logout(){ window.localStorage.user = null },
   likes: [],
   cart: [1,2,3],
   menu: false,

@@ -27,6 +27,10 @@ p a {
   @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-2 leading-snug tracking-wide text-sm px-3 whitespace-nowrap bg-gray-100 text-gray-800 placeholder:text-gray-400 min-h-[2.5rem]
 }
 
+.label {
+  @apply text-sm text-gray-500 my-2
+}
+
 .popup {
   @apply max-w-md mx-auto px-4 fixed bg-white z-50 w-full inset-0 overflow-auto;
 }
