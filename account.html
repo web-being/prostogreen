@@ -1,0 +1,55 @@
+---
+title: Управление аккаунтом
+---
+
+{% include head.html %}
+{% include templates.html %}
+
+<main class="max-w-md mx-auto relative px-4 pt-4" :with="{pickup:false, newAddress:false, anotherRecipient:false}">
+  <nav class="mt-2 flex flex-row items-center gap-4">
+    <a href="profile" class=" text-gray-500">
+      <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.1665 8H1.99982M7.83316 1L1.65811 7.17504C1.2025 7.63065 1.2025 8.36935 1.65811 8.82496L7.83316 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </nav>
+
+  <section id="details" class="my-3">
+  </section>
+
+
+  <section id="address" class="my-3">
+    <h2 class="font-semibold">Адрес</h2>
+    <button class="button">Добавить адрес</button>
+  </section>
+
+
+  <section id="account-details" class="my-3">
+    <h2 class="font-semibold">Учетные данные</h2>
+  </section>
+
+
+  <section id="payment-details" class="my-3">
+    <h2 class="font-semibold">Оплата</h2>
+  </section>
+
+  <section id="linked-accounts" class="my-3">
+    <h2 class="font-semibold">Связанные аккаунты</h2>
+
+    <div class="flex flex-row gap-3 mt-2">
+      <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
+        <svg class="w-4 h-4 text-blue-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>VK</title><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z" fill="currentColor"/></svg>
+      </a>
+      <a href="" @click.prevent="login(),loginPopup=false" class="button flex flex-row items-center justify-center">
+        <svg class="w-4 h-4 text-orange-500" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Odnoklassniki</title><path d="M12 0a6.2 6.2 0 0 0-6.194 6.195 6.2 6.2 0 0 0 6.195 6.192 6.2 6.2 0 0 0 6.193-6.192A6.2 6.2 0 0 0 12.001 0zm0 3.63a2.567 2.567 0 0 1 2.565 2.565 2.568 2.568 0 0 1-2.564 2.564 2.568 2.568 0 0 1-2.565-2.564 2.567 2.567 0 0 1 2.565-2.564zM6.807 12.6a1.814 1.814 0 0 0-.91 3.35 11.611 11.611 0 0 0 3.597 1.49l-3.462 3.463a1.815 1.815 0 0 0 2.567 2.566L12 20.066l3.405 3.403a1.813 1.813 0 0 0 2.564 0c.71-.709.71-1.858 0-2.566l-3.462-3.462a11.593 11.593 0 0 0 3.596-1.49 1.814 1.814 0 1 0-1.932-3.073 7.867 7.867 0 0 1-8.34 0c-.318-.2-.674-.29-1.024-.278z" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <nav class="flex flex-col gap-3 my-3 mb-6">
+    <button class="button button-lg !text-gray-800 hover:!text-gray-500">Выйти</button>
+    <button class="button button-lg !text-gray-800 hover:!text-gray-500">Удалить аккаунт</button>
+  </nav>
+</main>
+
+{% include foot.html %}

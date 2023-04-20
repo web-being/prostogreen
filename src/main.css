@@ -11,7 +11,7 @@ p a {
 }
 
 .button {
-  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-1 leading-snug tracking-wide text-sm text-center px-3 whitespace-nowrap bg-white shadow-md text-green-500 border-gray-50 border-t hover:text-green-400 h-10 flex flex-row items-center justify-center;
+  @apply w-auto focus:ring-4 focus:outline-none rounded-lg py-1 leading-snug tracking-wide text-sm text-center px-3 whitespace-nowrap bg-white shadow-md text-green-500 border-gray-50 border-t hover:text-green-400 h-10 flex flex-row items-center justify-center font-semibold;
 }
 .button-lg {
   @apply h-12 text-base;
