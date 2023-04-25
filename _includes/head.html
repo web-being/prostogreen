@@ -1,4 +1,3 @@
-
 <!doctype html>
 
 <head>
@@ -16,14 +15,18 @@
 <body class="font-medium text-gray-800" :with="{
   user: window.localStorage.user && window.JSON.parse(window.localStorage.user),
   login(name='Артём Шевченко'){ window.localStorage.user = window.JSON.stringify(this.user = {name}) },
-  logout(){ window.localStorage.user = null },
-  likes: [],
+  logout() { window.localStorage.user = null },
+  likes: window.localStorage.likes ? window.JSON.parse(window.localStorage.likes) : [],
   cart: [1,2,3],
   menu: false,
   loginPopup: false,
   address: '',
   map: false,
-  like(id,likes=this.likes) { likes.includes(id) ? likes.splice(likes.indexOf(id), 1) : likes.push(id) }
+  like(item, likes=this.likes, idx=likes.findIndex(e=>e.id===item.id)) {
+    if (idx >= 0) this.likes.splice(idx, 1);
+    else this.likes.push(item);
+    window.localStorage.likes = window.JSON.stringify(this.likes);
+  }
 }">
 <header class="max-w-md mx-auto flex flex-row items-center p-2 gap-4 h-14 sticky border-b border-gray-200 bg-white top-0 z-30">
   <a id="logo" class="" href="{{ '/' | relative_url }}">

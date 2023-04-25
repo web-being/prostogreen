@@ -21,7 +21,7 @@ title: Пользователь
     </div>
 
     <div class="grid grid-cols-2 gap-3 mt-6">
-      <button class="flex flex-row overflow-hidden border-gray-50 border-t items-end font-semibold shadow-md rounded-md h-24 flex-grow">
+      <a href="likes" class="flex flex-row overflow-hidden border-gray-50 border-t items-end font-semibold shadow-md rounded-md h-24 flex-grow">
         <span class="p-3">Избранное</span>
         <svg class="ml-auto" width="103" height="88" viewBox="0 0 103 88" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M55.4199 18.467C38.7287 8.29165 17.3067 11.0561 6.33553 28.9046C-4.6356 46.753 0.247454 69.048 17.1246 80.4577C31.1568 89.9441 69.8367 107 82.4783 112.48C83.8927 113.093 84.5998 113.4 85.3028 113.382C85.9163 113.367 86.5285 113.168 87.0339 112.82C87.6129 112.421 88.0048 111.757 88.7887 110.43C95.7946 98.5654 117.062 62.0317 122.839 46.1091C129.786 26.9584 120.848 5.83052 101.265 -1.93989C81.6815 -9.71029 62.9424 0.424173 55.4199 18.467Z" fill="url(#paint0_linear_349_6557)"/>
@@ -32,7 +32,7 @@ title: Пользователь
           </linearGradient>
           </defs>
         </svg>
-      </button>
+      </a>
       <button class="flex flex-row overflow-hidden border-gray-50 border-t items-end font-semibold shadow-md rounded-md h-24 flex-grow">
         <span class="p-3">Заказы</span>
         <svg class="ml-auto" width="94" height="88" viewBox="0 0 94 88" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -128,12 +128,12 @@ title: Пользователь
     При хорошем уходе и благоприятных погодных условиях плоды могут быть получены уже в конце августа.
     Сорт яблони Мельба был выведен в Швеции.`,img:'apples-8.png',price:380,rating:4}
   ]}">
-  <header class="flex flex-row items-baseline mb-3">
-    <h2 class="text-lg font-semibold leading-tight">Вам может понравиться</h2>
-    <a class="ml-auto text-green-600 hover:text-green-500 active:text-green-400 text-sm whitespace-nowrap" href="/#see-all">Смотреть все</a>
-  </header>
-  <div :render="articlesTpl"></div>
-</section>
+    <header class="flex flex-row items-baseline mb-3">
+      <h2 class="text-lg font-semibold leading-tight">Вам может понравиться</h2>
+      <a class="ml-auto text-green-600 hover:text-green-500 active:text-green-400 text-sm whitespace-nowrap" href="/#see-all">Смотреть все</a>
+    </header>
+    <div :render="articlesTpl"></div>
+  </section>
 </main>
 
 {% include foot.html %}
